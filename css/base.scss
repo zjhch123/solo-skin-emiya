@@ -21,7 +21,7 @@ a {
       color: #fff;
       line-height: 26px;
       font-weight: bolder;
-      font-size: 20px;
+      font-size: 18px;
     }
     ul, li {
       list-style: none;
@@ -116,6 +116,9 @@ a {
     padding: 0 20px;
     box-sizing: border-box;
     max-width: 1440px;
+    a:hover {
+      opacity: .8;
+    }
     ul {
       list-style: none;
       font-weight: 800;
@@ -159,13 +162,26 @@ a {
     align-items: center;
     justify-content: center;
     .subtitle {
+      width: 70%;
+      margin: auto;
+      text-align: center;
       font-size: 24px;
-      line-height: 1.1;
+      line-height: 1.4;
       display: block;
       font-weight: 300;
       margin: 0 auto;
       color: white;
       font-family: -apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,"PingFang SC","Hiragino Sans GB",STHeiti,"Microsoft YaHei","Microsoft JhengHei","Source Han Sans SC","Noto Sans CJK SC","Source Han Sans CN","Noto Sans SC","Source Han Sans TC","Noto Sans CJK TC","WenQuanYi Micro Hei",SimSun,sans-serif;
     }
+  }
+}
+
+.footer {
+  background: #263547;
+  color: white;
+  text-align: center;
+  padding: 36px 0;
+  .footer__container {
+    line-height: 1.5;
   }
 }

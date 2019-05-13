@@ -23,6 +23,16 @@
   <@emiya_head title="${blogTitle}"></@emiya_head>
   <body id="emiya_blog">
     <#include "header.ftl">
+    <div class="blog__container">
+      <div class="container-fluid">
+        <div class="article-list">
+          <#include "article-list.ftl">
+        </div>
+        <div class="aside">
+          <#include "side.ftl">
+        </div>
+      </div>
+    </div>
     <#include "footer.ftl">
   </body>
 </html>

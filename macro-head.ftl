@@ -21,7 +21,7 @@
 <#macro emiya_head title description="">
   <head>
     <@head title="${title}" description="${description}">
-      <link type="text/css" rel="stylesheet" href="${staticServePath}/skins/${skinDirName}/css/base.css?${staticResourceVersion}" charset="utf-8" />
+      <link type="text/css" rel="stylesheet" href="${staticServePath}/skins/${skinDirName}/css/base${miniPostfix}.css?${staticResourceVersion}" charset="utf-8" />
     </@head>
     <#nested>
   </head>

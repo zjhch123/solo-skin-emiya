@@ -1,2 +1,171 @@
 @import "vditor/src/assets/scss/classic";
 @import "../../../scss/reset";
+body, html {
+  font-family: "Heiti SC","Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3",verdana;
+}
+a {
+  color: inherit;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  &__container {
+    .brand {
+      color: #fff;
+      line-height: 26px;
+      font-weight: bolder;
+      font-size: 20px;
+    }
+    ul, li {
+      list-style: none;
+    }
+  }
+
+  &__container--mobile {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    height: 56px;
+
+    padding: 0 20px;
+    box-sizing: border-box;
+    position: relative;
+
+    .toggle {
+      -webkit-appearance: none;
+      border-color: transparent;
+      background: transparent;
+      border-radius: 50%;
+      width: 46px;
+      height: 46px;
+      &:active {
+        background-color: rgba(255,255,255,.25);
+      }
+      .icon-bar {
+        display: block;
+        width: 20px;
+        height: 2px;
+        border-radius: 1px;
+        background: white;
+        margin: auto;
+        & + .icon-bar {
+          margin-top: 4px;
+        }
+      }
+    }
+    .toggle-items {
+      opacity: 0;
+      pointer-events: none;
+      transform: scaleX(0);
+      transform-origin: top right;
+      transition: all .2s cubic-bezier(.47,0,.4,.99) 0s;
+
+      &.show {
+        pointer-events: auto;
+        opacity: 1;
+        transform: scaleX(1);
+        ul {
+          transform: scaleY(1);
+        }
+      }
+
+      position: absolute;
+      display: block;
+      right: 30px;
+      top: 50px;
+      ul {
+        padding: 8px 0;
+        width: 170px;
+        overflow: hidden;
+        border: none;
+        box-shadow: rgba(0,0,0,.117647) 0 1px 6px, rgba(0,0,0,.239216) 0 1px 4px;
+        background: #FFF;
+        transform: scaleY(0);
+        transform-origin: top right;
+        transition: transform .4s cubic-bezier(.32,1,.23,1) 0s;
+      }
+      li {
+        font-size: 14px;
+        line-height: 28px;
+        font-weight: 800;
+        a {
+          color: #777;
+          padding: 10px 15px;
+          display: block;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+        }
+      }
+    }
+  }
+  &__container--web {
+    height: 62px;
+    margin: auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 20px;
+    box-sizing: border-box;
+    max-width: 1440px;
+    ul {
+      list-style: none;
+      font-weight: 800;
+      font-size: 0;
+      li {
+        display: inline-block;
+      }
+      a {
+        color: white;
+        padding: 20px;
+        text-transform: uppercase;
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: bolder;
+        letter-spacing: 1px;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    &__container--mobile {
+      display: flex;
+    }
+    &__container--web {
+      display: none;
+    }
+  }
+}
+
+.header {
+  position: relative;
+  height: 276px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: scroll;
+  background-size: cover;
+  .header__container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .subtitle {
+      font-size: 24px;
+      line-height: 1.1;
+      display: block;
+      font-weight: 300;
+      margin: 0 auto;
+      color: white;
+      font-family: -apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,"PingFang SC","Hiragino Sans GB",STHeiti,"Microsoft YaHei","Microsoft JhengHei","Source Han Sans SC","Noto Sans CJK SC","Source Han Sans CN","Noto Sans SC","Source Han Sans TC","Noto Sans CJK TC","WenQuanYi Micro Hei",SimSun,sans-serif;
+    }
+  }
+}

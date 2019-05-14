@@ -15,7 +15,7 @@
 </#macro>
 
 <#macro blog_header>
-  <nav class="navbar">
+  <nav class="navbar J_navbar">
     <div class="navbar__container navbar__container--mobile">
       <a class="brand" href="/">${blogTitle}</a>
       <button type="button" class="toggle J_navbar_toggle" data-for="toggle-items">

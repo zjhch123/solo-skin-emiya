@@ -8,7 +8,7 @@
     <@common_header></@common_header>
     <div class="blog__container">
       <div class="container-fluid">
-        <div class="article-list container--left">
+        <div class="container--left">
           <h1 class="blog__title"><small>${sumLabel}</small> ${tags?size}<small>${tagLabel}</small></h1>
           <div class="tagsList">
             <#list tags as tag>

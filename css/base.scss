@@ -504,3 +504,29 @@ a {
     border-color: currentColor;
   }
 }
+
+.archiveList {
+  text-align: justify;
+  &:after {
+    content: '';
+    display: inline-block;
+    width: 100%;
+    height: 1px;
+  }
+  .archiveItem {
+    display: inline-block;
+    width: 31%;
+    height: 100px;
+    margin-bottom: 6px;
+    font-size: 14px;
+    border: 1px solid #ececec;
+    transition: all .4s;
+    box-sizing: border-box;
+    padding: 12px;
+    transform: translateZ(0);
+    &:hover {
+      box-shadow: 2px 2px 2px rgba(0,0,0,.1);
+      transform: scale(1.01);
+    }
+  }
+}

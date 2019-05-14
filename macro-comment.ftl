@@ -18,7 +18,7 @@
   </div>
 </#macro>
 
-<#macro article_comment comment>
+<#macro article_comment comment article>
   <div class="comment" id="${comment.oId}">
     <img class="comment__avatar" src="${comment.commentThumbnailURL}" />
     <main class="comment__detail">
@@ -36,8 +36,10 @@
           onmouseout="page.hideComment('${comment.commentOriginalCommentId}')"
         >${comment.commentOriginalCommentName}</a>
         </#if>
-        <time class="info__time">${comment.commentDate?string("yyyy-MM-dd HH:mm")}</time>
-        <a class="info__btn" href="javascript:page.toggleEditor('${comment.oId}', '${comment.commentName}')">${replyLabel}</a>
+        <time class="info__time">${comment.commentDate2?string("yyyy-MM-dd HH:mm")}</time>
+        <#if article.commentable>
+          <a class="info__btn" href="javascript:page.toggleEditor('${comment.oId}', '${comment.commentName}')">${replyLabel}</a>
+        </#if>
       </div>
       <div class="vditor-reset">
         ${comment.commentContent}
@@ -51,7 +53,7 @@
   <h3>评论列表</h3>
   <ul class="article__comments" id="comments">
     <#list commentList as comment>
-      <@article_comment comment=comment></@article_comment>
+      <@article_comment comment=comment article=article></@article_comment>
     </#list>
   </ul>
 </#if>

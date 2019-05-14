@@ -26,20 +26,20 @@
  * @description 皮肤脚本
  * @static
  */
-class Emiya {
-  constructor() {
-    this.listen();
-  }
-  listen() {
-    $(".J_navbar_toggle").on("click", function() {
-        const targetClass = '.' + $(this).attr('data-for')
-        if ($(targetClass).hasClass('show')) {
-            $(targetClass).removeClass('show')
-        } else {
-            $(targetClass).addClass('show')
-        }
-    });
-  }
+
+function Emiya() {
+  this.listen()
+}
+
+Emiya.prototype.listen = function() {
+  $(".J_navbar_toggle").on("click", function() {
+    var targetClass = '.' + $(this).attr('data-for')
+    if ($(targetClass).hasClass('show')) {
+        $(targetClass).removeClass('show')
+    } else {
+        $(targetClass).addClass('show')
+    }
+  });
 }
 
 window.Skin = new Emiya();

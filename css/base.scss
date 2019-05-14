@@ -666,6 +666,11 @@ a {
     &:hover {
       display: flex !important;
     }
+    @include mobile {
+      & {
+        display: none !important;
+      }
+    }
   }
   &:hover {
     background: #f1f1f1;

@@ -35,7 +35,7 @@
     </div>
     <div class="tags">
       <#list mostUsedTags as tag>
-      <a href="${servePath}/tags/${tag.tagTitle?url('UTF-8')}">${tag.tagTitle}</a>
+      <a class="tagBtn" href="${servePath}/tags/${tag.tagTitle?url('UTF-8')}">${tag.tagTitle}</a>
       </#list>
     </div>
   </section>

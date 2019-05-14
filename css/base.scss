@@ -67,6 +67,9 @@ a {
       margin-left: 0;
       width: 100%;
     }
+    .container--right {
+      margin-top: 24px;
+    }
   }
 }
 
@@ -464,21 +467,6 @@ a {
     }
     .tags {
       margin-top: 24px;
-      a {
-        display: inline-block;
-        border: 1px solid #f5f5f5;
-        border-radius: 2px;
-        padding: 5px 10px;
-        color: rgba(0,0,0,.6);
-        line-height: 22px;
-        font-size: 14px;
-        text-decoration: none;
-        margin: 0 1px;
-        margin-bottom: 6px;
-        &:hover {
-          border-color: currentColor;
-        }
-      }
     }
     .lists {
       a {
@@ -498,5 +486,21 @@ a {
   margin-top: 6rem;
   .footer__container {
     line-height: 1.5;
+  }
+}
+
+.tagBtn {
+  display: inline-block;
+  border: 1px solid #f5f5f5;
+  border-radius: 2px;
+  padding: 5px 10px;
+  color: rgba(0,0,0,.6);
+  line-height: 22px;
+  font-size: 14px;
+  text-decoration: none;
+  margin: 0 1px;
+  margin-bottom: 6px;
+  &:hover {
+    border-color: currentColor;
   }
 }

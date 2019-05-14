@@ -530,3 +530,26 @@ a {
     }
   }
 }
+
+.linkList {
+  .link {
+    display: block;
+    height: 100px;
+    margin-bottom: 12px;
+    font-size: 16px;
+    border: 1px solid #ececec;
+    transition: all .4s;
+    box-sizing: border-box;
+    padding: 12px;
+    transform: translateZ(0);
+    &:hover {
+      box-shadow: 2px 2px 2px rgba(0,0,0,.1);
+      transform: scale(1.01);
+    }
+    &__desc {
+      font-size: 12px;
+      display: block;
+      padding-top: 6px;
+    }
+  }
+}

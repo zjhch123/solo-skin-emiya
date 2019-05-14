@@ -3,7 +3,7 @@
 
 <!DOCTYPE html>
 <html>
-  <@emiya_head title="${blogTitle}"></@emiya_head>
+  <@emiya_head title="${tag.tagTitle} - ${blogTitle}"></@emiya_head>
   <body id="emiya_blog">
     <@common_header></@common_header>
     <div class="blog__container">

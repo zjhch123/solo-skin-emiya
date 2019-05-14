@@ -9,7 +9,7 @@
     <div class="blog__container">
       <div class="container-fluid">
         <div class="container--left">
-          <h3 class="blog__title">${archiveLabel} - ${sumLabel} ${statistic.statisticPublishedBlogArticleCount} ${articleLabel}</h3>
+          <h1 class="blog__title">${archiveLabel} - ${sumLabel} ${statistic.statisticPublishedBlogArticleCount} ${articleLabel}</h1>
           <div class="archiveList">
             <#list archiveDates as archiveDate>
             <#if "en" == localeString?substring(0, 2)>

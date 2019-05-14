@@ -7,6 +7,7 @@ body, html {
   position: relative;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  font-size: 14px;
 }
 
 a {
@@ -26,7 +27,49 @@ a {
     @content;
   }
 }
- 
+
+.blog__container {
+  margin-top: 48px;
+  .blog__title {
+    font-size: 22px;
+    margin-bottom: 24px;
+    small {
+      font-size: 14px;
+      margin-left: 4px;
+    }
+  }
+}
+
+.container-fluid {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1190px;
+  margin: auto;
+  .container--left,
+  .container--right {
+    box-sizing: border-box;
+    padding: 0 16px;
+  }
+  .container--left {
+    flex: 1 1 auto;
+  }
+  .container--right {
+    flex: 0 0 300px;
+    margin-left: 30px;
+  }
+
+  @include mobile {
+    flex-direction: column;
+    .container--left,
+    .container--right {
+      flex: 1;
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+}
+
 .navbar {
   position: absolute;
   top: 0;
@@ -333,7 +376,9 @@ a {
 
 .sidebar {
   .sidebar__container {
-    margin-top: 27px;
+    & + .sidebar__container {
+      margin-top: 40px;
+    }
     .header {
       border-bottom: 1px solid rgba(0,0,0,.0785);
       span {
@@ -341,7 +386,7 @@ a {
         font-weight: 700;
         color: rgba(0,0,0,.8);
         position: relative;
-        padding: 13px 0;
+        padding: 0 0 13px;
         display: table;
         &:after {
           position: absolute;
@@ -450,6 +495,7 @@ a {
   color: white;
   text-align: center;
   padding: 36px 0;
+  margin-top: 6rem;
   .footer__container {
     line-height: 1.5;
   }

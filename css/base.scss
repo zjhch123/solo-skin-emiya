@@ -10,6 +10,18 @@ body, html {
   font-size: 14px;
 }
 
+::-moz-selection {
+  color: white;
+  text-shadow: none;
+  background: #D6555F;
+}
+
+::selection {
+  color: white;
+  text-shadow: none;
+  background: #D6555F;
+}
+
 a {
   color: inherit;
   &:hover {
@@ -18,8 +30,25 @@ a {
   }
 }
 
-.vditor-reset a {
-  color: $primary-color !important;
+.vditor-reset {
+  a {
+    color: $primary-color !important;
+  }
+  blockquote {
+    border-left: 2px solid $primary-color;
+  }
+  ol {
+    counter-reset: item;
+    list-style: none;
+    position: relative;
+    li:before {
+      position: absolute;
+      left: 0;
+      content: counter(item) ". ";
+      counter-increment: item;
+      color: #d6555f;
+    }
+  }
 }
 
 @mixin mobile {
@@ -83,6 +112,8 @@ a {
   z-index: 3;
   font-weight: 800;
   transition: background-color .4s;
+  border-bottom: 1px solid transparent;
+  box-sizing: border-box;
   &.is-fixed {
     position: fixed !important;
     background-color: rgba(255,255,255,.9);
@@ -98,14 +129,11 @@ a {
     }
     &.show {
       transform: translateY(100%);
-      .navbar__container {
-        border-bottom-color: #efefef;
-      }
+      border-bottom-color: #efefef;
     }
   }
 
   &__container {
-    border-bottom: 1px solid transparent;
     .brand {
       color: #fff;
       line-height: 26px;

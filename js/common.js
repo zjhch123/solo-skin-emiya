@@ -36,7 +36,7 @@ function checkScroll(_now) {
   var $nav = $('.J_navbar')
 
   function checkFixed(nowScroll) {
-    var offsetTop = $nav.height()
+    var offsetTop = $nav.height() + 1
 
     if (nowScroll > offsetTop) {
       $nav.addClass('is-fixed').css('top', -1 * offsetTop);

@@ -1,3 +1,3 @@
 <#include "macro-page.ftl">
 
-<@articlePage htmlTitle="${tag.tagTitle} - ${blogTitle}" pageTitle="${tag.tagTitle} ${tagLabel}"></@articlePage>
+<@articlesPage htmlTitle="${tag.tagTitle} - ${blogTitle}" pageTitle="${tag.tagTitle} ${tagLabel}"></@articlesPage>

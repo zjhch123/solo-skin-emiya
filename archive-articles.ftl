@@ -1,6 +1,6 @@
 <#include "macro-page.ftl">
 
-<@articlePage htmlTitle="${archiveDate.archiveDateYear}/${archiveDate.archiveDateMonth} (${archiveDate.archiveDatePublishedArticleCount}) - ${blogTitle}">
+<@articlesPage htmlTitle="${archiveDate.archiveDateYear}/${archiveDate.archiveDateMonth} (${archiveDate.archiveDatePublishedArticleCount}) - ${blogTitle}">
   <h1 class="blog__title">
     <#if "en" == localeString?substring(0, 2)>
     ${archiveDate.archiveDateMonth} ${archiveDate.archiveDateYear}
@@ -9,4 +9,4 @@
     </#if>
     - ${sumLabel} ${archiveDate.archiveDatePublishedArticleCount} ${articleLabel}
   </h1>
-</@articlePage>
+</@articlesPage>

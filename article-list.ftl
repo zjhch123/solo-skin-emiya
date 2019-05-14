@@ -19,7 +19,19 @@
       </div>
     </div>
     <div class="article__intro">
-      <a class="title" href="${servePath}${article.articlePermalink}">${article.articleTitle}</a>
+      <div class="title">
+        <a href="${servePath}${article.articlePermalink}">${article.articleTitle}</a>
+        <#if article.articlePutTop>
+        <sup>
+          ${topArticleLabel}
+        </sup>
+        </#if>
+        <#if article.hasUpdated>
+        <sup>
+          ${updatedLabel}
+        </sup>
+        </#if>
+      </div>
       <div class="abstract vditor-reset">${article.articleAbstract}</div>
     </div>
     <div class="article__visit">

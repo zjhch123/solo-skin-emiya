@@ -26,7 +26,7 @@
  * @description 皮肤脚本
  * @static
  */
-class Skin {
+class Emiya {
   constructor() {
     this.listen();
   }
@@ -42,4 +42,4 @@ class Skin {
   }
 }
 
-new Skin();
+window.Skin = new Emiya();

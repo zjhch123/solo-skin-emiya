@@ -27,7 +27,7 @@
 </html>
 </#macro>
 
-<#macro articlePage htmlTitle pageTitle="">
+<#macro articlesPage htmlTitle pageTitle="">
   <@sidePage htmlTitle="${htmlTitle}" pageTitle="${pageTitle}">
     <#nested>
     <#include "article-list.ftl">

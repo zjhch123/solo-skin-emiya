@@ -48,3 +48,29 @@
     </header>
   </@blog_header>
 </#macro>
+
+<#macro article_header>
+  <@blog_header>
+    <header class="custom_header" style="background-image: url('/skins/${skinDirName}/images/header.jpg')">
+      <div class="custom_header__container">
+        <div class="custom_header__articleMeta">
+          <h1 class="articleMeta__title">${article.articleTitle}</h1>
+          <div class="articleMeta__info">
+            <span class="author">@${article.authorName} &nbsp;${article.articleCreateDate?string("yyyy-MM-dd")}</span>
+            <span class="comments">
+              <a href="${servePath}${article.articlePermalink}#comments">${article.articleCommentCount} ${commentLabel}</a>
+            </span>
+            <span class="views">
+              ${article.articleViewCount} ${viewLabel}
+            </span>
+          </div>
+          <div class="articleMeta__tags">
+            <#list article.articleTags?split(",") as articleTag>
+            <a class="tagBtn" rel="tag" href="${servePath}/tags/${articleTag?url('UTF-8')}">${articleTag}</a>&nbsp;
+            </#list>
+          </div>
+        </div>
+      </div>
+    </header>
+  </@blog_header>
+</#macro>

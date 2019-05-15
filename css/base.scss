@@ -117,7 +117,8 @@ a {
   &.is-fixed {
     position: fixed !important;
     background-color: rgba(255,255,255,.9);
-    transition: transform .4s;
+    transition: transform .4s, opacity .4s;
+    opacity: 0;
     .brand {
       color: black;
     }
@@ -128,6 +129,7 @@ a {
       color: black;
     }
     &.show {
+      opacity: 1;
       transform: translateY(100%);
       border-bottom-color: #efefef;
     }
@@ -339,6 +341,7 @@ a {
         font-size: 0;
         .tagBtn {
           color: white;
+          margin-right: 12px;
         }
       }
     }
@@ -478,8 +481,8 @@ a {
 
 .sidebar {
   .sidebar__container {
-    & + .sidebar__container {
-      margin-top: 40px;
+    & + .sidebar__container .header {
+      padding-top: 40px;
     }
     .header {
       border-bottom: 1px solid rgba(0,0,0,.0785);
@@ -567,7 +570,8 @@ a {
     .tags {
       margin-top: 24px;
     }
-    .lists {
+    .lists, ul {
+      list-style: none;
       a {
         border-bottom: 1px solid #eee;
         line-height: 40px;

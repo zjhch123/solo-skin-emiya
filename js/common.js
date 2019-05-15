@@ -41,7 +41,7 @@ function checkScroll(_now) {
     if (nowScroll > offsetTop) {
       $nav.addClass('is-fixed').css('top', -1 * offsetTop);
     }
-    if (nowScroll == 0) {
+    if (nowScroll <= 0) {
       $nav.removeClass('is-fixed').css('top', 0);
     }
   }

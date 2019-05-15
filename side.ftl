@@ -66,4 +66,13 @@
     </div>
   </section>
   </#if>
+
+  <#if article??>
+    <section class="sidebar__container" id="externalRelevantArticles">
+    </section>
+    <section class="sidebar__container" id="randomArticles">
+    </section>
+    <section class="sidebar__container" id="relevantArticles">
+    </section>
+  </#if>
 </div>

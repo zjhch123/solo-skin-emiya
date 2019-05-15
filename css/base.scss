@@ -143,6 +143,9 @@ a {
     }
     .toggle {
       color: black;
+      .icon-bar {
+        background-color: black;
+      }
     }
     li a {
       color: black;
@@ -453,6 +456,14 @@ a {
         transform: translateY(-50%);
       }
     }
+    @include mobile {
+      .item--split {
+        margin-right: 16px;
+        &:after {
+          right: -8px;
+        }
+      }
+    }
   }
   & + .article {
     margin-top: 48px;
@@ -722,11 +733,6 @@ a {
       &__username {
         color: #666;
       }
-      &__time {
-        color: #aaa;
-        padding: 0 4px;
-        font-size: 14px;
-      }
       &__replyName {
         color: #666;
         margin-left: 4px;
@@ -735,6 +741,10 @@ a {
         font-size: 12px;
         float: right;
       }
+    }
+    .time {
+      color: #aaa;
+      font-size: 14px;
     }
   }
 }

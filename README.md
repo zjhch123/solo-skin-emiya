@@ -5,7 +5,7 @@
 ## 概述
 
 - 作者: zjhch123
-- 版本: 1.1.2
+- 版本: 1.1.3
 - 对应solo版本: 3.6.0
 
 ## 预览
@@ -60,3 +60,7 @@ git clone https://github.com/zjhch123/solo-skin-emiya emiya
 
 1. 修复文章标题在小屏手机下不换行的bug
 2. 增加打zip包脚本
+
+### 1.1.3
+
+1. 优化在小屏手机下的样式

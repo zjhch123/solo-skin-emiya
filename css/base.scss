@@ -389,19 +389,23 @@ a {
       display: flex;
       align-items: center;
       color: #333;
+      flex: 0 0 auto;
       &__avatar {
         width: 36px;
         height: 36px;
         display: block;
         border-radius: 50%;
+        flex: 0 0 36px;
       }
       &__name {
         padding-left: 10px;
+        flex: 0 0 auto;
       }
     }
     .split {
       padding: 0 8px;
       color: #c7c7c7;
+      flex: 0 0 auto;
     }
     .tags {
       color: #333;
@@ -725,6 +729,7 @@ a {
     display: block;
     border-radius: 50%;
     margin-right: 20px;
+    flex: 0 0 50px;
   }
   &__detail {
     flex: 1;

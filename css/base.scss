@@ -574,7 +574,8 @@ a {
       list-style: none;
       a {
         border-bottom: 1px solid #eee;
-        line-height: 40px;
+        line-height: 1.51;
+        padding: 10px 0;
         display: block;
       }
     }
@@ -713,37 +714,6 @@ a {
         font-size: 12px;
         float: right;
       }
-    }
-  }
-}
-
-.article__recommend {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  font-size: 14px;
-  margin-top: 38px;
-  flex-wrap: wrap;
-  padding: 0 16px;
-  box-sizing: border-box;
-
-  & > div {
-    flex: 1;
-    margin-bottom: 16px;
-  }
-  .recommend__title {
-    color: black;
-    font-size: 18px;
-    padding: 10px 0;
-  }
-  ul {
-    list-style: none;
-    padding-left: 0;
-  }
-
-  @include mobile {
-    & {
-      flex-direction: column;
     }
   }
 }

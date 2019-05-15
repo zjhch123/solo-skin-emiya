@@ -42,3 +42,7 @@ git clone https://github.com/zjhch123/solo-skin-emiya emiya
 1. 重构css/scss、js，重写部分css样式与js逻辑，删除不必要的js逻辑
 2. 重构模板文件，模板更通用化
 3. 遵循社区皮肤开发规范
+
+### 1.0.1
+
+1. 增加移动端字体大小与行间距

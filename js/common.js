@@ -31,6 +31,53 @@ function Emiya() {
   this.listen()
 }
 
+function initPageShare() {
+  var $this = $('.J_share')
+  var $qrCode = $('.J_share_wechat')
+  var shareURL = $qrCode.data('url')
+  var avatarURL = $qrCode.data('avatar')
+  var title = encodeURIComponent($qrCode.data('title') + ' - ' +
+    $qrCode.data('blogtitle')),
+    url = encodeURIComponent(shareURL)
+
+  var urls = {}
+  urls.weibo = 'http://v.t.sina.com.cn/share/share.php?title=' + title + '&url=' + url + '&pic=' + avatarURL
+  urls.qzone = 'https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + url + '&sharesource=qzone&title=' + title + '&pics=' + avatarURL
+  urls.twitter = 'https://twitter.com/intent/tweet?status=' + title + ' ' + url
+
+  $this.on('click', function () {
+    var key = $(this).data('type')
+
+    if (!key) {
+      return
+    }
+
+    if (key === 'wechat') {
+      if ($qrCode.find('canvas').length === 0) {
+        $.ajax({
+          method: 'GET',
+          url: Label.staticServePath +
+          '/js/lib/jquery.qrcode.min.js',
+          dataType: 'script',
+          cache: true,
+          success: function () {
+            $qrCode.qrcode({
+              width: 128,
+              height: 128,
+              text: shareURL,
+            })
+          },
+        })
+      } else {
+        $qrCode.find('canvas').slideToggle()
+      }
+      return false
+    }
+
+    window.open(urls[key], '_blank', 'top=100,left=200,width=648,height=618')
+  })
+}
+
 function checkScroll(_now) {
   var nowScroll = _now
   var $nav = $('.J_navbar')
@@ -79,6 +126,10 @@ Emiya.prototype.listen = function() {
     var nowScrollTop = $(window).scrollTop()
     scrollManager(nowScrollTop)
   })
+}
+
+Emiya.prototype.initArticle = function() {
+  initPageShare()
 }
 
 window.Skin = new Emiya();

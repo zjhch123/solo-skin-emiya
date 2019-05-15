@@ -683,10 +683,12 @@ a {
   border-bottom: 1px solid #f1f1f1;
   &.comment-body-ref {
     position: absolute;
-    width: 800px;
+    width: 100%;
     background: white;
     margin-top: -3px;
     left: 20px;
+    border: 1px solid #efefef;
+    box-sizing: border-box;
     &:hover {
       display: flex !important;
     }
@@ -738,6 +740,7 @@ a {
 }
 
 .comment__container {
+  margin-top: 48px;
   .article__comments {
     position: relative;
   }
@@ -757,5 +760,46 @@ a {
   h3 {
     margin-top: 16px;
     font-size: 20px;
+  }
+}
+
+.share__container {
+  display: flex;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+  a {
+    flex: 1;
+    display: block;
+    height: 36px;
+    position: relative;
+    canvas {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      display: block;
+      z-index: 2;
+    }
+  }
+  .item {
+    background-size: auto 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    &:nth-child(1) {
+      background-color: #EA5D5C;
+      background-image: url('../images/weibo.png');
+    }
+    &:nth-child(2) {
+      background-color: #F5BC31;
+      background-image: url('../images/qzone.png');
+    }
+    &:nth-child(3) {
+      background-color: #51B674;
+      background-image: url('../images/wechat.png');
+      @include mobile {
+        display: none;
+      }
+    }
   }
 }

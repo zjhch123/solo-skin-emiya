@@ -349,6 +349,7 @@ a {
       &__title {
         font-size: 2.8em;
         line-height: 1.1;
+        word-break: break-all;
       }
       &__info {
         font-family: Lora,'Times New Roman',serif;
@@ -417,6 +418,7 @@ a {
       line-height: 33px;
       margin: 18px 0 10px;
       display: table;
+      word-break: break-all;
       sup {
         font-size: 10px;
         top: -20px;
@@ -607,6 +609,7 @@ a {
         line-height: 1.51;
         padding: 10px 0;
         display: block;
+        word-break: break-all;
       }
     }
   }
@@ -678,6 +681,10 @@ a {
   &:hover {
     box-shadow: 2px 2px 2px rgba(0,0,0,.1);
     transform: scale(1.01);
+  }
+  &__title,
+  &__desc {
+    word-break: break-all;
   }
   &__desc {
     font-size: 12px;

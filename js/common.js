@@ -26,6 +26,7 @@
  * @description 皮肤脚本
  * @static
  */
+document.body.addEventListener('touchstart', function () { });
 
 function Emiya() {
   this.listen()

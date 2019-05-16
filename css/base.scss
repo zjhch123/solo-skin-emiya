@@ -146,6 +146,9 @@ a {
       .icon-bar {
         background-color: black;
       }
+      &:active {
+        background-color: rgba(0,0,0,.25);
+      }
     }
     li a {
       color: black;
@@ -384,6 +387,7 @@ a {
     .article__info--left {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
     }
     .author {
       display: flex;
@@ -438,10 +442,11 @@ a {
     color: #333;
     display: flex;
     justify-content: space-between;
-
-    .article__visit--left {
+    flex-wrap: wrap;
+    &--left {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
     }
     .createTime {
       display: none;
@@ -699,10 +704,13 @@ a {
 
 .comment {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   padding: 32px 8px 16px;
   box-sizing: border-box;
   border-bottom: 1px solid #f1f1f1;
+  position: relative;
+
   &.comment-body-ref {
     position: absolute;
     width: 100%;
@@ -728,35 +736,70 @@ a {
     height: 50px;
     display: block;
     border-radius: 50%;
-    margin-right: 20px;
-    flex: 0 0 50px;
+    position: absolute;
+    left: 8px;
+    top: 32px;
+  }
+  &__info,
+  &__detail {
+    padding-left: 64px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  &__info {
+    font-size: 16px;
+    display: block;
+    margin-bottom: 12px;
+    &:after {
+      content: '';
+      clear: both;
+      display: table;
+    }
+    .username {
+      color: #666;
+    }
+    .replyName {
+      color: #666;
+      margin-left: 4px;
+    }
+    .btn {
+      font-size: 12px;
+      float: right;
+    }
   }
   &__detail {
     flex: 1;
-    .info {
-      font-size: 16px;
-      display: block;
-      margin-bottom: 12px;
-      &:after {
-        content: '';
-        clear: both;
-        display: table;
-      }
-      &__username {
-        color: #666;
-      }
-      &__replyName {
-        color: #666;
-        margin-left: 4px;
-      }
-      &__btn {
-        font-size: 12px;
-        float: right;
-      }
-    }
     .time {
       color: #aaa;
       font-size: 14px;
+    }
+  }
+
+  @include mobile {
+    & {
+      flex-wrap: wrap;
+      align-items: center;
+      &__avatar {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 36px;
+        height: 36px;
+        flex: 0 0 36px;
+        margin-right: 12px;
+      }
+      &__info,
+      &__detail {
+        padding-left: 0;
+      }
+      &__info {
+        flex: 1;
+        margin-bottom: 0;
+      }
+      &__detail {
+        margin-top: 12px;
+        flex: 1 0 100%;
+      }
     }
   }
 }

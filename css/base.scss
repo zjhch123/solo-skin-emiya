@@ -27,6 +27,7 @@ body, html {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   font-size: 14px;
+  height: auto;
 }
 
 ::-moz-selection {
@@ -68,6 +69,13 @@ a {
       color: #d6555f;
     }
   }
+  pre {
+    word-wrap: normal;
+    &>code {
+      box-sizing: border-box;
+      width: 100%;
+    }
+  }
 }
 
 @mixin mobile {
@@ -103,6 +111,7 @@ a {
   }
   .container--left {
     flex: 1 1 auto;
+    overflow: auto;
   }
   .container--right {
     flex: 0 0 300px;

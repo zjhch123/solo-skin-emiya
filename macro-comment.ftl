@@ -29,10 +29,9 @@
       </#if>
       <#if comment.isReply>
       @<a 
-        class="replyName"
-        href="${servePath}${article.permalink}#${comment.commentOriginalCommentId}" 
-        onmouseover="page.showComment(this, '${comment.commentOriginalCommentId}', 20);" 
-        onmouseout="page.hideComment('${comment.commentOriginalCommentId}')"
+        class="replyName J_replyName"
+        href="javascript:;"
+        data-originalId="${comment.commentOriginalCommentId}" 
       >${comment.commentOriginalCommentName}</a>
       </#if>
       <#if article.commentable>

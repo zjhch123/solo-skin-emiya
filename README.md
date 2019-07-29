@@ -72,3 +72,8 @@ git clone https://github.com/zjhch123/solo-skin-emiya emiya
 ### 1.1.5
 
 1. 修复代码块过长导致的溢出问题
+
+### 1.1.6
+
+1. 优化部分样式
+2. 评论mouseover事件取消，改为click显示高亮

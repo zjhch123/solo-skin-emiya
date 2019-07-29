@@ -780,8 +780,10 @@ a {
   &__detail {
     flex: 1;
     .time {
+      margin-top: 8px;
       color: #aaa;
       font-size: 14px;
+      display: block;
     }
   }
 
@@ -877,4 +879,16 @@ a {
       }
     }
   }
+}
+.blink {
+  @keyframes blink {
+    0%, 50%, 100% {
+      background-color: white;
+    }
+    25%, 75% {
+      background-color: #d1d1d1;
+    }
+  }
+  animation: blink 1.5s linear;
+  animation-iteration-count: 2;
 }

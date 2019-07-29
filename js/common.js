@@ -123,10 +123,18 @@ Emiya.prototype.listen = function() {
         $(targetClass).addClass('show')
     }
   });
+  $(".J_replyName").on('click', function() {
+    var replyName = $(this).attr('data-originalId');
+    $('#' + replyName)[0].scrollIntoViewIfNeeded(true);
+    $('#' + replyName).addClass('blink');
+    setTimeout(function() {
+      $('#' + replyName).removeClass('blink');
+    }, 3000);
+  })
   $(window).on('scroll', function() {
     var nowScrollTop = $(window).scrollTop()
     scrollManager(nowScrollTop)
-  })
+  });
 }
 
 Emiya.prototype.initArticle = function() {

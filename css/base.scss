@@ -111,7 +111,7 @@ a {
   }
   .container--left {
     flex: 1 1 auto;
-    overflow: auto;
+    overflow: hidden;
   }
   .container--right {
     flex: 0 0 300px;
@@ -891,4 +891,10 @@ a {
   }
   animation: blink 1.5s linear;
   animation-iteration-count: 2;
+}
+/**
+  Single line highlighting
+*/
+p code{
+  color: #cc0414;
 }

@@ -111,7 +111,7 @@ a {
   }
   .container--left {
     flex: 1 1 auto;
-    overflow: auto;
+    overflow: hidden;
   }
   .container--right {
     flex: 0 0 300px;
@@ -689,7 +689,7 @@ a {
 
 .friendLink {
   display: block;
-  height: 98px;
+  height: 100px;
   margin-bottom: 12px;
   font-size: 16px;
   border: 1px solid #ececec;

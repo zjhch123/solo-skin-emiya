@@ -75,4 +75,7 @@
     <section class="sidebar__container" id="relevantArticles">
     </section>
   </#if>
+  <div class="toTop">
+    <img src="${staticServePath}/skins/${skinDirName}/images/top.png" />
+  </div>
 </div>

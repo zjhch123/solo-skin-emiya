@@ -142,3 +142,24 @@ Emiya.prototype.initArticle = function() {
 }
 
 window.Skin = new Emiya();
+
+/**
+  Return to the top
+*/
+$(function() {
+  $('toTop').hide();
+  $(window).scroll(function() {
+    if($(this).scrollTop() > 100) {
+      $('.toTop').fadeIn();
+    } else {
+      $('.toTop').fadeOut();
+    }
+  });
+
+  $('.toTop img').click(function() {
+    $('html ,body').animate({
+      scrollTop: 0
+    }, 300);
+    return false;
+  });
+});

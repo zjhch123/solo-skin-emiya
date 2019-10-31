@@ -892,9 +892,37 @@ a {
   animation: blink 1.5s linear;
   animation-iteration-count: 2;
 }
+
 /**
   Single line highlighting
 */
 p code{
   color: #cc0414;
+}
+
+/**
+  Return to the top
+*/
+.toTop {
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  display: none;
+}
+
+.toTop img {
+  float: right;
+  width: 50%;
+  cursor: pointer;
+  position: relative;
+  animation: topImg 1s infinite;
+}
+
+@keyframes topImg {
+  from {
+    top: 0px;
+  }
+  to {
+    top: 5px;
+  }
 }

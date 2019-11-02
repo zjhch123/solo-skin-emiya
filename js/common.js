@@ -149,6 +149,7 @@ function ScrollManagerCreator(_now) {
   var offsetTop = $nav.height() + 1
   var showBackToTopHeight = 100
   var contentsStaticTop = $contents.offset().top
+  var checkContentHighlightId
 
   function checkFixed(nextScroll) {
     if (nextScroll > offsetTop) {
@@ -191,15 +192,22 @@ function ScrollManagerCreator(_now) {
   }
 
   function checkContentHighlight(nextScroll) {
-    var $contentLink = $('.J_article__contents--container a')
-    $contentLink.removeClass('active')
+    clearTimeout(checkContentHighlightId)
 
-    for (var i = 0; i < $contentLink.length; i++) {
-      var target = $contentLink.eq(i).attr('data-target')
-      if (nextScroll + offsetTop > $(target).offset().top) {
-        $contentLink.eq(i).addClass('active')
+    checkContentHighlightId = setTimeout(function() {
+      var $contentLink = $('.J_article__contents--container a')
+      var nowIndex
+
+      for (var i = 0; i < $contentLink.length; i++) {
+        var target = $contentLink.eq(i).attr('data-target')
+        if (nextScroll + offsetTop > $(target).offset().top) {
+          nowIndex = i
+        }
       }
-    }
+
+      $contentLink.removeClass('active')
+      $contentLink.eq(nowIndex).addClass('active')
+    }, 50);
   }
 
   checkFixed(nowScroll)

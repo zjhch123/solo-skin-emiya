@@ -192,12 +192,12 @@ function ScrollManagerCreator(_now) {
 
   function checkContentHighlight(nextScroll) {
     var $contentLink = $('.J_article__contents--container a')
+    $contentLink.removeClass('active')
 
     for (var i = 0; i < $contentLink.length; i++) {
-      var target = $contentLink.eq(i).attr('data-target');
+      var target = $contentLink.eq(i).attr('data-target')
       if (nextScroll + offsetTop > $(target).offset().top) {
-        $contentLink.removeClass('active');
-        $contentLink.eq(i).addClass('active');
+        $contentLink.eq(i).addClass('active')
       }
     }
   }

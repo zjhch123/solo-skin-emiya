@@ -647,10 +647,8 @@ a {
             display: block;
             padding: 8px 0;
             font-size: 14px;
-            transition: transform .1s linear;
             &.active {
               color: $primary-color;
-              transform: scale(1.1);
             }
           }
         }

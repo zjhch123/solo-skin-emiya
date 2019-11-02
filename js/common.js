@@ -148,7 +148,6 @@ function ScrollManagerCreator(_now) {
   var $contents = $('.J_article__contents')
   var offsetTop = $nav.height() + 1
   var showBackToTopHeight = 100
-  var contentsStaticTop = $contents.offset().top
   var checkContentHighlightId
 
   function checkFixed(nextScroll) {
@@ -181,6 +180,7 @@ function ScrollManagerCreator(_now) {
     if ($contents.length <= 0) {
       return
     }
+    var contentsStaticTop = $contents.offset().top
     if (nextScroll > contentsStaticTop - offsetTop) {
       $contents.css({
         'position': 'fixed',

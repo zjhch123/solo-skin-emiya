@@ -12,7 +12,7 @@
       <div class="blog__container">
         <div class="container-fluid">
           <div class="container--left">
-            <div class="article__content vditor-reset">
+            <div class="article__content J_article__content vditor-reset">
               ${article.articleContent}
               <#if "" != article.articleSign.signHTML?trim>
               <div>

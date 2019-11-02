@@ -5,14 +5,21 @@
 ## 概述
 
 - 作者: zjhch123
-- 版本: 1.1.6
-- 对应solo版本: 3.6.3
+- 版本: 1.2.0
+- 对应solo版本: 3.6.6
 
 ## 预览
 
 <img src="https://image.hduzplus.xyz/image/1557897716540.jpg" alt="preview" width="600">
 
 [在线预览](https://blog.hduzplus.xyz?from=github_page)
+
+## 各页面链接
+
+- 标签集合页: /tags.html
+- 分类页: /category.html
+- 存档页: /archives.html
+- 友情链接: /links.html
 
 ## 安装方式
 
@@ -23,6 +30,7 @@
 ### git clone方式
 
 在solo的skins目录下使用命令即可安装皮肤到本地
+
 ```shell
 git clone https://github.com/zjhch123/solo-skin-emiya emiya
 ```
@@ -34,6 +42,7 @@ git clone https://github.com/zjhch123/solo-skin-emiya emiya
 1. 感谢[原皮肤amaze](https://github.com/spiritree/typecho-theme-amaze)作者[spiritree](https://github.com/spiritree)制作的精美皮肤
 2. 感谢[Vanessa219](https://github.com/Vanessa219)提供的开发环境
 3. 感谢[88250](https://github.com/88250)制作的[小而美的博客系统solo](https://github.com/b3log/solo)
+4. 感谢[AlgerFan](https://github.com/AlgerFan)制作了返回顶部功能以及修复了一些bug
 
 ## Changelog
 
@@ -77,3 +86,11 @@ git clone https://github.com/zjhch123/solo-skin-emiya emiya
 
 1. 优化部分样式
 2. 评论mouseover事件取消，改为click显示高亮
+
+### 1.2.0
+
+1. 增加返回顶部功能 （感谢[AlgerFan](https://github.com/AlgerFan)
+2. 增加分类页面，链接: `/category.html`
+3. 增加文章目录
+4. 移除默认添加的导航栏
+5. 修复部分样式问题

@@ -79,40 +79,163 @@ function initPageShare() {
   })
 }
 
-function checkScroll(_now) {
-  var nowScroll = _now
-  var $nav = $('.J_navbar')
+function initContents() {
+  var priorities = {
+    h1: 5,
+    h2: 4,
+    h3: 3,
+    h4: 2,
+    h5: 1,
+  };
+  var $titles = getArticleTitles();
 
-  function checkFixed(nowScroll) {
-    var offsetTop = $nav.height() + 1
-
-    if (nowScroll > offsetTop) {
-      $nav.addClass('is-fixed').css('top', -1 * offsetTop);
-    }
-    if (nowScroll <= 0) {
-      $nav.removeClass('is-fixed').css('top', 0);
-    }
+  if ($titles.length === 0) {
+    $('.J_article__contents').hide();
+    return;
   }
 
-  checkFixed(nowScroll)
+  var tpl = '<ul class="article__contents">';
+  var prevPriority;
+  var firstPriority;
 
-  return function(_nowScroll) {
-    checkFixed(_nowScroll)
+  $titles.each(function(index, dom) {
+    var priority = priorities[dom.tagName.toLowerCase()];
+    var title = $titles.eq(index).text();
+    var item = '<li><a href="javascript:void(0);" data-target="#' + $titles.eq(index).attr('id') + '">' + title + '</a></li>';
+
+    if (!priority) {
+      return;
+    }
+
+    if (!firstPriority) {
+      tpl += item;
+      firstPriority = priority;
+    } else {
+      if (priority === prevPriority) {
+        tpl += item;
+      } else if (priority < prevPriority) {
+        tpl += Array(prevPriority - priority).fill('<ul>').join('') + item;
+      } else if (priority > prevPriority) {
+        tpl += Array(priority - prevPriority).fill('</ul>').join('') + item;
+      }
+    }
+
+    prevPriority = priority;
+  });
+
+  tpl += Array(firstPriority - prevPriority + 1).fill('</ul>').join('');
+  $('.J_article__contents--container').append(tpl);
+}
+
+var getArticleTitles = (function() {
+  var $titles = null;
+
+  return function() {
+    if ($titles !== null) { return $titles; }
+
+    var $t = $('[id^=b3_solo_h]');
+    $titles = $t;
+
+    return $titles;
+  }
+})();
+
+function ScrollManagerCreator(_now) {
+  var nowScroll = _now
+  var $nav = $('.J_navbar')
+  var $backToTop = $('.toTop')
+  var $contents = $('.J_article__contents')
+  var showBackToTopHeight = 100
+  var checkContentHighlightId
+
+  function checkFixed(nextScroll) {
+    var offsetTop = $nav.height() + 1
+    if (nextScroll > offsetTop) {
+      $nav.addClass('is-fixed').css('top', -1 * offsetTop);
+    } else if (nextScroll <= 0) {
+      $nav.removeClass('is-fixed').css('top', 0);
+    }
 
     if (!$nav.hasClass('is-fixed')) {
       return
     }
 
-    if (_nowScroll > nowScroll) {
+    if (nextScroll > nowScroll) {
       $nav.removeClass('show')
     } else {
       $nav.addClass('show')
     }
-    nowScroll = _nowScroll
+  }
+
+  function checkBackToTop(nextScroll) {
+    if(nextScroll > showBackToTopHeight) {
+      $backToTop.fadeIn()
+    } else {
+      $backToTop.fadeOut()
+    }
+  }
+
+  function checkContents(nextScroll) {
+    if ($contents.length <= 0) {
+      return
+    }
+    
+    var $prev = $contents.prev()
+    var contentsStaticTop = $prev.offset().top + $prev.height()
+    var offsetTop = $nav.height() + 1
+
+    if (nextScroll > contentsStaticTop - offsetTop) {
+      $contents.css({
+        'position': 'fixed',
+        'top': offsetTop
+      });
+    } else {
+      $contents.css('position', 'static');
+    }
+  }
+
+  function checkContentHighlight(nextScroll) {
+    clearTimeout(checkContentHighlightId)
+
+    checkContentHighlightId = setTimeout(function() {
+      var offsetTop = $nav.height() + 1
+      var $contentLink = $('.J_article__contents--container a')
+      var nowIndex
+
+      for (var i = 0; i < $contentLink.length; i++) {
+        var target = $contentLink.eq(i).attr('data-target')
+        if (nextScroll + offsetTop > $(target).offset().top) {
+          nowIndex = i
+        }
+      }
+
+      $contentLink.removeClass('active')
+      $contentLink.eq(nowIndex).addClass('active')
+    }, 50);
+  }
+
+  checkFixed(nowScroll)
+  checkBackToTop(nowScroll)
+  checkContents(nowScroll)
+  checkContentHighlight(nowScroll)
+
+  return function(nextScroll) {
+    checkFixed(nextScroll)
+    checkBackToTop(nextScroll)
+    checkContents(nextScroll)
+    checkContentHighlight(nextScroll)
+
+    nowScroll = nextScroll
   }
 }
 
-var scrollManager = checkScroll($(window).scrollTop())
+function scrollTo(to) {
+  $('html ,body').animate({
+    scrollTop: to,
+  }, 300);
+}
+
+var scrollManager = ScrollManagerCreator($(window).scrollTop())
 
 Emiya.prototype.listen = function() {
   $(".J_navbar_toggle").on("click", function() {
@@ -130,36 +253,27 @@ Emiya.prototype.listen = function() {
     setTimeout(function() {
       $('#' + replyName).removeClass('blink');
     }, 3000);
-  })
+  });
+  $('.J_backToTop').on('click', function(e) {
+    scrollTo(0);
+    e.preventDefault();
+  });
   $(window).on('scroll', function() {
     var nowScrollTop = $(window).scrollTop()
     scrollManager(nowScrollTop)
   });
+  $('body').on('click', '.J_article__contents--container a', function() {
+    var target = $(this).attr('data-target');
+    var scrollTarget = $(target).offset().top - $('.J_navbar').height() + 1;
+    scrollTo(scrollTarget);
+  });
 }
 
 Emiya.prototype.initArticle = function() {
-  initPageShare()
+  initPageShare();
+  try {
+    initContents();
+  } catch (e) { console.error(e); }
 }
 
 window.Skin = new Emiya();
-
-/**
-  Return to the top
-*/
-$(function() {
-  $('toTop').hide();
-  $(window).scroll(function() {
-    if($(this).scrollTop() > 100) {
-      $('.toTop').fadeIn();
-    } else {
-      $('.toTop').fadeOut();
-    }
-  });
-
-  $('.toTop img').click(function() {
-    $('html ,body').animate({
-      scrollTop: 0
-    }, 300);
-    return false;
-  });
-});

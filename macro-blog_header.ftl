@@ -2,9 +2,6 @@
   <#list pageNavigations as page>
   <li><a href="${page.pagePermalink}" target="${page.pageOpenTarget}">${page.pageTitle}</a></li>
   </#list>
-  <li><a href="${servePath}/tags.html">${allTagsLabel}</a></li>
-  <li><a href="${servePath}/archives.html">${archiveLabel}</a></li>
-  <li><a rel="archive" href="${servePath}/links.html">${linkLabel}</a></li>
   <#if isLoggedIn>
   <li><a href="${servePath}/admin-index.do#main">${adminLabel}</a></li>
   <li><a href="${logoutURL}">${logoutLabel}</a></li>

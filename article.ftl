@@ -35,6 +35,14 @@
             <div class="comment__container">
               <@article_comments commentList=articleComments article=article></@article_comments>
             </div>
+            <div class="recommendation__container">
+              <div class="item" id="externalRelevantArticles">
+              </div>
+              <div class="item" id="randomArticles">
+              </div>
+              <div class="item" id="relevantArticles">
+              </div>
+            </div>
           </div>
           <div class="aside container--right">
             <#include "side.ftl">

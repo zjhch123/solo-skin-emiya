@@ -14,6 +14,13 @@
 
 [在线预览](https://blog.hduzplus.xyz?from=github_page)
 
+## 各页面链接
+
+- 标签集合页: /tags.html
+- 分类页: /category.html
+- 存档页: /archives.html
+- 友情链接: /links.html
+
 ## 安装方式
 
 ### 直接下载方式
@@ -23,6 +30,7 @@
 ### git clone方式
 
 在solo的skins目录下使用命令即可安装皮肤到本地
+
 ```shell
 git clone https://github.com/zjhch123/solo-skin-emiya emiya
 ```

@@ -79,40 +79,52 @@ function initPageShare() {
   })
 }
 
-function checkScroll(_now) {
+function ScrollManagerCreator(_now) {
   var nowScroll = _now
+  
   var $nav = $('.J_navbar')
+  var $backToTop = $('.toTop')
+  var offsetTop = $nav.height() + 1
+  var showBackToTopHeight = 100
 
-  function checkFixed(nowScroll) {
-    var offsetTop = $nav.height() + 1
-
-    if (nowScroll > offsetTop) {
+  function checkFixed(nextScroll) {
+    if (nextScroll > offsetTop) {
       $nav.addClass('is-fixed').css('top', -1 * offsetTop);
-    }
-    if (nowScroll <= 0) {
+    } else if (nextScroll <= 0) {
       $nav.removeClass('is-fixed').css('top', 0);
     }
-  }
-
-  checkFixed(nowScroll)
-
-  return function(_nowScroll) {
-    checkFixed(_nowScroll)
 
     if (!$nav.hasClass('is-fixed')) {
       return
     }
 
-    if (_nowScroll > nowScroll) {
+    if (nextScroll > nowScroll) {
       $nav.removeClass('show')
     } else {
       $nav.addClass('show')
     }
-    nowScroll = _nowScroll
+  }
+
+  function checkBackToTop(nextScroll) {
+    if(nextScroll > showBackToTopHeight) {
+      $backToTop.fadeIn()
+    } else {
+      $backToTop.fadeOut()
+    }
+  }
+
+  checkFixed(nowScroll)
+  checkBackToTop(nowScroll)
+
+  return function(nextScroll) {
+    checkFixed(nextScroll)
+    checkBackToTop(nextScroll)
+
+    nowScroll = nextScroll
   }
 }
 
-var scrollManager = checkScroll($(window).scrollTop())
+var scrollManager = ScrollManagerCreator($(window).scrollTop())
 
 Emiya.prototype.listen = function() {
   $(".J_navbar_toggle").on("click", function() {
@@ -130,7 +142,13 @@ Emiya.prototype.listen = function() {
     setTimeout(function() {
       $('#' + replyName).removeClass('blink');
     }, 3000);
-  })
+  });
+  $('.J_backToTop').on('click', function(e) {
+    $('html ,body').animate({
+      scrollTop: 0
+    }, 300);
+    e.preventDefault();
+  });
   $(window).on('scroll', function() {
     var nowScrollTop = $(window).scrollTop()
     scrollManager(nowScrollTop)
@@ -148,18 +166,5 @@ window.Skin = new Emiya();
 */
 $(function() {
   $('toTop').hide();
-  $(window).scroll(function() {
-    if($(this).scrollTop() > 100) {
-      $('.toTop').fadeIn();
-    } else {
-      $('.toTop').fadeOut();
-    }
-  });
-
-  $('.toTop img').click(function() {
-    $('html ,body').animate({
-      scrollTop: 0
-    }, 300);
-    return false;
-  });
+  
 });

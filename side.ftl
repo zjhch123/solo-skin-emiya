@@ -33,9 +33,9 @@
     <div class="header">
       <span>${tagsLabel}</span>
     </div>
-    <div class="tags">
+    <div class="tags rowSmallItemLayout">
       <#list mostUsedTags as tag>
-      <a class="tagBtn" href="${servePath}/tags/${tag.tagTitle?url('UTF-8')}">${tag.tagTitle}</a>
+      <a class="item" href="${servePath}/tags/${tag.tagTitle?url('UTF-8')}">${tag.tagTitle}</a>
       </#list>
     </div>
   </section>
@@ -75,7 +75,7 @@
     <section class="sidebar__container" id="relevantArticles">
     </section>
   </#if>
-  <div class="toTop">
+  <div class="toTop J_backToTop">
     <img src="${staticServePath}/skins/${skinDirName}/images/top.png" />
   </div>
 </div>

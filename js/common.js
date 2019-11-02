@@ -180,9 +180,15 @@ function ScrollManagerCreator(_now) {
     }
     
     var $prev = $contents.prev()
+    var contentsHeight = $contents.height();
     var contentsStaticTop = $prev.offset().top + $prev.height()
     var offsetTop = $nav.height() + 1
-    var articleBottom = $article.offset().top + $article.height() - $contents.height() + offsetTop;
+    var articleBottom = $article.offset().top + $article.height() - contentsHeight + offsetTop;
+
+    if (contentsHeight + offsetTop > $(window).height()) {
+      $contents.css('position', 'static');
+      return;
+    }
 
     if (nextScroll <= contentsStaticTop - offsetTop) {
       $contents.css('position', 'static');

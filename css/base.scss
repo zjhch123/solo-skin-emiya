@@ -679,6 +679,7 @@ a {
 .rowSmallItemLayout {
   .item {
     display: inline-block;
+    vertical-align: top;
     padding: 5px 10px;
     line-height: 22px;
     font-size: 14px;
@@ -691,6 +692,7 @@ a {
 .rowItemLayout {
   .item {
     display: inline-block;
+    vertical-align: top;
     width: 30%;
     margin-right: 2%;
     margin-bottom: 2%;
@@ -968,6 +970,7 @@ a {
 
 .toTop {
   position: fixed;
+  z-index: 5;
   bottom: 40px;
   right: 40px;
   display: none;

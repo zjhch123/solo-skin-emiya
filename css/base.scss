@@ -21,6 +21,7 @@
 @import "../../../scss/reset";
 
 $primary-color: #d6555f;
+$blog-max-width: 1280px;
 
 body, html {
   position: relative;
@@ -345,7 +346,7 @@ a {
     }
     .custom_header__articleMeta {
       width: 100%;
-      max-width: 1190px;
+      max-width: $blog-max-width;
       height: 100%;
 
       margin: auto;

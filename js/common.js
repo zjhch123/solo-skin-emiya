@@ -142,15 +142,14 @@ var getArticleTitles = (function() {
 
 function ScrollManagerCreator(_now) {
   var nowScroll = _now
-  
   var $nav = $('.J_navbar')
   var $backToTop = $('.toTop')
   var $contents = $('.J_article__contents')
-  var offsetTop = $nav.height() + 1
   var showBackToTopHeight = 100
   var checkContentHighlightId
 
   function checkFixed(nextScroll) {
+    var offsetTop = $nav.height() + 1
     if (nextScroll > offsetTop) {
       $nav.addClass('is-fixed').css('top', -1 * offsetTop);
     } else if (nextScroll <= 0) {
@@ -183,6 +182,7 @@ function ScrollManagerCreator(_now) {
     
     var $prev = $contents.prev()
     var contentsStaticTop = $prev.offset().top + $prev.height()
+    var offsetTop = $nav.height() + 1
 
     if (nextScroll > contentsStaticTop - offsetTop) {
       $contents.css({
@@ -198,6 +198,7 @@ function ScrollManagerCreator(_now) {
     clearTimeout(checkContentHighlightId)
 
     checkContentHighlightId = setTimeout(function() {
+      var offsetTop = $nav.height() + 1
       var $contentLink = $('.J_article__contents--container a')
       var nowIndex
 

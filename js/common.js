@@ -26,8 +26,6 @@
  * @description 皮肤脚本
  * @static
  */
-document.body.addEventListener('touchstart', function () { });
-
 function Emiya() {
   this.listen()
 }
@@ -145,6 +143,7 @@ function ScrollManagerCreator(_now) {
   var $nav = $('.J_navbar')
   var $backToTop = $('.toTop')
   var $contents = $('.J_article__contents')
+  var $article = $('.J_article__content')
   var showBackToTopHeight = 100
   var checkContentHighlightId
 
@@ -183,14 +182,20 @@ function ScrollManagerCreator(_now) {
     var $prev = $contents.prev()
     var contentsStaticTop = $prev.offset().top + $prev.height()
     var offsetTop = $nav.height() + 1
+    var articleBottom = $article.offset().top + $article.height() - $contents.height() + offsetTop;
 
-    if (nextScroll > contentsStaticTop - offsetTop) {
+    if (nextScroll <= contentsStaticTop - offsetTop) {
+      $contents.css('position', 'static');
+    } else if (nextScroll > contentsStaticTop - offsetTop && nextScroll < articleBottom - offsetTop) {
       $contents.css({
         'position': 'fixed',
-        'top': offsetTop
+        'top': offsetTop,
       });
     } else {
-      $contents.css('position', 'static');
+      $contents.css({
+        'position': 'absolute',
+        'top': articleBottom,
+      });
     }
   }
 
@@ -267,6 +272,7 @@ Emiya.prototype.listen = function() {
     var scrollTarget = $(target).offset().top - $('.J_navbar').height() + 1;
     scrollTo(scrollTarget);
   });
+  $('body').on('touchstart', function() { });
 }
 
 Emiya.prototype.initArticle = function() {

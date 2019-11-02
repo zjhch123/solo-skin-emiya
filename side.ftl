@@ -68,7 +68,7 @@
   </#if>
 
   <#if article??>
-  <section class="sidebar__container J_article__contents">
+  <section class="sidebar__container article__contents J_article__contents">
     <div class="header">
       <span>${articleContent}</span>
     </div>

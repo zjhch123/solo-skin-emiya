@@ -90,7 +90,7 @@ a {
 .blog {
   &__container {
     width: 100%;
-    max-width: 1190px;
+    max-width: 1280px;
     margin: 48px auto 0;
   }
   &__title {
@@ -117,7 +117,7 @@ a {
     overflow: hidden;
   }
   .container--right {
-    flex: 0 0 300px;
+    flex: 0 0 340px;
     margin-left: 30px;
   }
 
@@ -624,7 +624,7 @@ a {
     .tags {
       margin-top: 24px;
     }
-    .lists, ul {
+    .lists {
       list-style: none;
       a {
         border-bottom: 1px solid #eee;
@@ -634,6 +634,33 @@ a {
         word-break: break-all;
       }
     }
+    .contents {
+      .article__contents {
+        padding: 10px 0;
+      }
+      ul {
+        list-style: none;
+        padding-left: 20px;
+        li {
+          line-height: 14px;
+          a {
+            display: block;
+            padding: 8px 0;
+            font-size: 14px;
+            transition: transform .1s linear;
+            &.active {
+              color: $primary-color;
+              transform: scale(1.1);
+            }
+          }
+        }
+      }
+    }
+  }
+  @include mobile {
+    .article__contents {
+      display: none;
+    } 
   }
 }
 
@@ -837,6 +864,7 @@ a {
 }
 
 .share__container {
+  margin-top: 48px;
   display: flex;
   width: 100%;
   position: relative;
@@ -908,5 +936,51 @@ a {
     height: 40px;
     display: block;
     animation: jump .6s linear infinite alternate-reverse;
+  }
+}
+
+.recommendation__container {
+  display: flex;
+  margin-top: 30px;
+  @include mobile {
+    flex-direction: column;
+    .item {
+      margin-top: 40px;
+      padding: 0 !important;
+    }
+  }
+  .item {
+    flex: 1;
+    padding: 0 8px;
+    .header {
+      border-bottom: 1px solid rgba(0,0,0,.0785);
+      span {
+        font-size: 18px;
+        font-weight: 700;
+        color: rgba(0,0,0,.8);
+        position: relative;
+        padding: 0 0 13px;
+        display: table;
+        &:after {
+          position: absolute;
+          bottom: -1px;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background: #2f2f2d;
+          content: '';
+        }
+      }
+    }
+    .lists, ul {
+      list-style: none;
+      a {
+        border-bottom: 1px solid #eee;
+        padding: 6px 0;
+        display: block;
+        word-break: break-all;
+        font-size: 14px;
+      }
+    }
   }
 }

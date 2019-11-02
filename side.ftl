@@ -68,12 +68,13 @@
   </#if>
 
   <#if article??>
-    <section class="sidebar__container" id="externalRelevantArticles">
-    </section>
-    <section class="sidebar__container" id="randomArticles">
-    </section>
-    <section class="sidebar__container" id="relevantArticles">
-    </section>
+  <section class="sidebar__container J_article__contents">
+    <div class="header">
+      <span>${articleContent}</span>
+    </div>
+    <div class="contents J_article__contents--container">
+    </div>
+  </section>
   </#if>
   <div class="toTop J_backToTop">
     <img src="${staticServePath}/skins/${skinDirName}/images/top.png" />

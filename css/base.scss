@@ -638,15 +638,17 @@ a {
     .contents {
       .article__contents {
         padding: 10px 0;
+        width: 308px;
+        overflow: hidden;
       }
       ul {
         list-style: none;
         padding-left: 20px;
         li {
-          line-height: 14px;
+          padding: 4px 0;
           a {
             display: block;
-            padding: 8px 0;
+            line-height: 1.51;
             font-size: 14px;
             &.active {
               color: $primary-color;

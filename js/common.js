@@ -180,7 +180,10 @@ function ScrollManagerCreator(_now) {
     if ($contents.length <= 0) {
       return
     }
-    var contentsStaticTop = $contents.offset().top
+    
+    var $prev = $contents.prev()
+    var contentsStaticTop = $prev.offset().top + $prev.height()
+
     if (nextScroll > contentsStaticTop - offsetTop) {
       $contents.css({
         'position': 'fixed',

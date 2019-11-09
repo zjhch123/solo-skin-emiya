@@ -46,6 +46,8 @@ git clone https://github.com/zjhch123/solo-skin-emiya emiya
 
 ## Changelog
 
+<details>
+
 ### 1.0.0
 
 1. 重构css/scss、js，重写部分css样式与js逻辑，删除不必要的js逻辑
@@ -102,3 +104,5 @@ git clone https://github.com/zjhch123/solo-skin-emiya emiya
 ### 1.2.2
 
 1. 修复存档页面当某个月份文章数为0时的显示问题
+
+</details>

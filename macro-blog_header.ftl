@@ -55,10 +55,13 @@
           <div class="articleMeta__info">
             <span class="author">@${article.authorName} &nbsp;${article.articleCreateDate?string("yyyy-MM-dd")}</span>
             <span class="comments">
-              <a href="${servePath}${article.articlePermalink}#comments">${article.articleCommentCount} ${commentLabel}</a>
+              <a href="${servePath}${article.articlePermalink}#comments">
+                <span data-uvstatcmt="${article.oId}">${article.articleCommentCount}</span> 
+                ${commentLabel}
+              </a>
             </span>
             <span class="views">
-              ${article.articleViewCount} ${viewLabel}
+              <span data-uvstaturl="${servePath}${article.articlePermalink}">${article.articleViewCount}</span> ${viewLabel}
             </span>
           </div>
           <div class="articleMeta__tags">

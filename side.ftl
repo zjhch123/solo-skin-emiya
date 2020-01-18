@@ -21,8 +21,6 @@
       <img class="user__avatar" src="${adminUser.userAvatar}" alt="${adminUser.userName}"/>
       <div class="user__info">
         <div class="item"><a href="${servePath}/archives.html">${statistic.statisticPublishedBlogArticleCount}<span class="text">${articleLabel}</span></a></div>
-        <div class="item"><a href="${servePath}/dynamic.html">${statistic.statisticPublishedBlogCommentCount}<span class="text">${commentLabel}</span></a></div>
-        <div class="item">${statistic.statisticBlogViewCount}<span class="text">${viewLabel}</span></div>
         <div class="item">${onlineVisitorCnt}<span class="text">${onlineVisitorLabel}</span></div>
       </div>
     </main>
@@ -41,30 +39,30 @@
   </section>
   </#if>
 
-  <#if 0 != mostCommentArticles?size>
+  <#if 0 != archiveDates?size>
   <section class="sidebar__container">
     <div class="header">
-      <span>${mostCommentLabel}</span>
+      <span>${archiveLabel}</span>
     </div>
     <div class="lists">
-      <#list mostCommentArticles as article>
-      <a href="${servePath}${article.articlePermalink}">${article.articleTitle}</a>
+      <#list archiveDates as archiveDate>
+        <#if archiveDate_index < 10>
+          <#if "en" == localeString?substring(0, 2)>
+            <a href="${servePath}/archives/${archiveDate.archiveDateYear}/${archiveDate.archiveDateMonth}"
+                title="${archiveDate.monthName} ${archiveDate.archiveDateYear}(${archiveDate.archiveDatePublishedArticleCount})">
+                ${archiveDate.monthName} ${archiveDate.archiveDateYear}(${archiveDate.archiveDatePublishedArticleCount})</a>
+          <#else>
+            <a href="${servePath}/archives/${archiveDate.archiveDateYear}/${archiveDate.archiveDateMonth}"
+                title="${archiveDate.archiveDateYear} ${yearLabel} ${archiveDate.archiveDateMonth} ${monthLabel}(${archiveDate.archiveDatePublishedArticleCount})">
+                ${archiveDate.archiveDateYear} ${yearLabel} ${archiveDate.archiveDateMonth} ${monthLabel}(${archiveDate.archiveDatePublishedArticleCount})</a>
+          </#if>
+        </#if>
       </#list>
+      <#if archiveDates?size &gt; 10>
+        <a href="${servePath}/archives.html">...</a>
+      </#if>
     </div>
-  </section>
-  </#if>
-
-  <#if 0 != mostViewCountArticles?size>
-  <section class="sidebar__container">
-    <div class="header">
-      <span>${mostViewLabel}</span>
-    </div>
-    <div class="lists">
-      <#list mostViewCountArticles as article>
-      <a href="${servePath}${article.articlePermalink}">${article.articleTitle}</a>
-      </#list>
-    </div>
-  </section>
+  </div>
   </#if>
 
   <#if article??>

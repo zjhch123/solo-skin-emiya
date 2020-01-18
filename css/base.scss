@@ -642,6 +642,11 @@ a {
       }
     }
     .contents {
+      height: calc(90vh - 163px);
+      overflow: auto;
+      &::-webkit-scrollbar {
+        display: none;
+      }
       .article__contents {
         padding: 10px 0;
         width: 308px;

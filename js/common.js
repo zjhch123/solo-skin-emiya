@@ -99,7 +99,10 @@ function initContents() {
   $titles.each(function(index, dom) {
     var priority = priorities[dom.tagName.toLowerCase()];
     var title = $titles.eq(index).text();
-    var item = '<li><a href="javascript:void(0);" data-target="#' + $titles.eq(index).attr('id') + '">' + title + '</a></li>';
+    var $item = $('<i><li><a href="javascript:void(0);" data-target="#' + $titles.eq(index).attr('id') + '"></a></li></i>');
+    $item.find('a').text(title);
+
+    var item = $item.html();
 
     if (!priority) {
       return;
@@ -145,7 +148,6 @@ function ScrollManagerCreator(_now) {
   var $contents = $('.J_article__contents')
   var $article = $('.J_article__content')
   var showBackToTopHeight = 100
-  var checkContentHighlightId
 
   function checkFixed(nextScroll) {
     var offsetTop = $nav.height() + 1
@@ -185,11 +187,6 @@ function ScrollManagerCreator(_now) {
     var offsetTop = $nav.height() + 1
     var articleBottom = $article.offset().top + $article.height() - contentsHeight + offsetTop;
 
-    if (contentsHeight + offsetTop > $(window).height()) {
-      $contents.css('position', 'static');
-      return;
-    }
-
     if (nextScroll <= contentsStaticTop - offsetTop) {
       $contents.css('position', 'static');
     } else if (nextScroll > contentsStaticTop - offsetTop && nextScroll < articleBottom - offsetTop) {
@@ -206,23 +203,19 @@ function ScrollManagerCreator(_now) {
   }
 
   function checkContentHighlight(nextScroll) {
-    clearTimeout(checkContentHighlightId)
+    var offsetTop = $nav.height() + 1
+    var $contentLink = $('.J_article__contents--container a')
+    var nowIndex
 
-    checkContentHighlightId = setTimeout(function() {
-      var offsetTop = $nav.height() + 1
-      var $contentLink = $('.J_article__contents--container a')
-      var nowIndex
-
-      for (var i = 0; i < $contentLink.length; i++) {
-        var target = $contentLink.eq(i).attr('data-target')
-        if (nextScroll + offsetTop > $(target).offset().top) {
-          nowIndex = i
-        }
+    for (var i = 0; i < $contentLink.length; i++) {
+      var target = $contentLink.eq(i).attr('data-target')
+      if (nextScroll + offsetTop > $(target).offset().top) {
+        nowIndex = i
       }
+    }
 
-      $contentLink.removeClass('active')
-      $contentLink.eq(nowIndex).addClass('active')
-    }, 50);
+    $contentLink.removeClass('active')
+    $contentLink.eq(nowIndex).addClass('active')
   }
 
   checkFixed(nowScroll)

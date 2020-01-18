@@ -33,7 +33,14 @@
                 data-avatar="${article.authorThumbnailURL}"></a>
             </div>
             <div class="comment__container">
-              <@article_comments commentList=articleComments article=article></@article_comments>
+              <#if commentable>
+                <div id="vcomment" data-name="${article.authorName}" data-postId="${article.oId}"></div>
+                  <#if !staticSite>
+                  <div id="soloComments" class="fn__none">
+                    <@article_comments commentList=articleComments article=article></@article_comments>
+                  </div>
+                  </#if>
+              </#if>
             </div>
             <div class="recommendation__container">
               <div class="item" id="externalRelevantArticles">

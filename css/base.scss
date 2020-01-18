@@ -88,6 +88,12 @@ a {
   }
 }
 
+.fn {
+  &__none {
+    display: none;
+  }
+}
+
 .blog {
   &__container {
     width: 100%;

@@ -37,8 +37,13 @@
     <div class="article__visit">
       <div class="article__visit--left">
         <span class="item--split createTime">${article.articleCreateDate?string("yyyy-MM-dd")}</span>
-        <a class="item item--split" href="${servePath}${article.articlePermalink}#comments">${article.articleCommentCount} ${commentLabel}</a>
-        <span class="item">${article.articleViewCount} ${viewLabel}</span>
+        <a class="item item--split" href="${servePath}${article.articlePermalink}#comments">
+          <span data-uvstatcmt="${article.oId}">${article.articleCommentCount}</span> 
+          ${commentLabel}
+        </a>
+        <span class="item">
+          <span data-uvstaturl="${servePath}${article.articlePermalink}">${article.articleViewCount}</span> ${viewLabel}
+        </span>
       </div>
       <a class="article__visit--right" href="${servePath}${article.articlePermalink}">阅读全文</a>
     </div>

@@ -5,7 +5,7 @@
 ## 概述
 
 - 作者: zjhch123
-- 版本: 1.3.0
+- 版本: 1.3.1
 - 对应solo版本: 3.8.0
 
 ## 预览
@@ -114,5 +114,9 @@ git clone https://github.com/zjhch123/solo-skin-emiya emiya
 
 1. 适配solo 3.8.0, 使用社区静态分析组件、vcomment组件
 2. 优化侧边栏，删除 评论最多/访问最多 文章
+
+### 1.3.1
+
+1. 优化文章目录展示逻辑
 
 </details>

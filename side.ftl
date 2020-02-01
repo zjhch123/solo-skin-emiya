@@ -21,6 +21,7 @@
       <img class="user__avatar" src="${adminUser.userAvatar}" alt="${adminUser.userName}"/>
       <div class="user__info">
         <div class="item"><a href="${servePath}/archives.html">${statistic.statisticPublishedBlogArticleCount}<span class="text">${articleLabel}</span></a></div>
+        <div class="item"><span data-uvstaturl="${servePath}">${statistic.statisticBlogViewCount}</span><span class="text">${viewLabel}</span></div>
         <div class="item">${onlineVisitorCnt}<span class="text">${onlineVisitorLabel}</span></div>
       </div>
     </main>

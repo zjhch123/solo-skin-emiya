@@ -148,6 +148,7 @@ function ScrollManagerCreator(_now) {
   var $contents = $('.J_article__contents')
   var $article = $('.J_article__content')
   var showBackToTopHeight = 100
+  var shouldStopAtBottom = false
 
   function checkFixed(nextScroll) {
     var offsetTop = $nav.height() + 1
@@ -186,7 +187,6 @@ function ScrollManagerCreator(_now) {
     var contentsStaticTop = $prev.offset().top + $prev.height()
     var offsetTop = $nav.height() + 1
     var articleBottom = $article.offset().top + $article.height() - contentsHeight + offsetTop;
-    var shouldStopAtBottom = false;
 
     if (nextScroll <= contentsStaticTop - offsetTop) {
       $contents.css('position', 'static');

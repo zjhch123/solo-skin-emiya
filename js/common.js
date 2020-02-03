@@ -134,7 +134,7 @@ var getArticleTitles = (function() {
   return function() {
     if ($titles !== null) { return $titles; }
 
-    var $t = $('[id^=b3_solo_h]');
+    var $t = $('.J_article__content [id*=_h]');
     $titles = $t;
 
     return $titles;
@@ -148,6 +148,7 @@ function ScrollManagerCreator(_now) {
   var $contents = $('.J_article__contents')
   var $article = $('.J_article__content')
   var showBackToTopHeight = 100
+  var shouldStopAtBottom = false
 
   function checkFixed(nextScroll) {
     var offsetTop = $nav.height() + 1
@@ -182,23 +183,31 @@ function ScrollManagerCreator(_now) {
     }
     
     var $prev = $contents.prev()
-    var contentsHeight = $contents.height();
+
+    var ulHeight = $contents.find('ul').height()
+    var contentsHeight = $contents.height()
+    contentsHeight = ulHeight > contentsHeight ? contentsHeight : ulHeight
+
     var contentsStaticTop = $prev.offset().top + $prev.height()
     var offsetTop = $nav.height() + 1
-    var articleBottom = $article.offset().top + $article.height() - contentsHeight + offsetTop;
+    var articleBottom = $article.offset().top + $article.height() - contentsHeight
 
     if (nextScroll <= contentsStaticTop - offsetTop) {
       $contents.css('position', 'static');
+      shouldStopAtBottom = false;
     } else if (nextScroll > contentsStaticTop - offsetTop && nextScroll < articleBottom - offsetTop) {
       $contents.css({
         'position': 'fixed',
         'top': offsetTop,
       });
+      shouldStopAtBottom = true;
     } else {
+      if (!shouldStopAtBottom) { return; }
       $contents.css({
         'position': 'absolute',
         'top': articleBottom,
       });
+      shouldStopAtBottom = true;
     }
   }
 

@@ -5,7 +5,7 @@
 ## 概述
 
 - 作者: zjhch123
-- 版本: 1.3.1
+- 版本: 1.3.2
 - 对应solo版本: 3.8.0
 
 ## 预览
@@ -118,5 +118,11 @@ git clone https://github.com/zjhch123/solo-skin-emiya emiya
 ### 1.3.1
 
 1. 优化文章目录展示逻辑
+
+### 1.3.2
+
+1. 修复因缺失模板变量导致的问题
+2. 隐藏侧栏中count为0的archive
+3. 重新压缩js/css
 
 </details>

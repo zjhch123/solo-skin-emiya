@@ -195,7 +195,7 @@ function ScrollManagerCreator(_now) {
     if (nextScroll <= contentsStaticTop - offsetTop) {
       $contents.css('position', 'static');
       shouldStopAtBottom = false;
-    } else if (nextScroll > contentsStaticTop - offsetTop && nextScroll < articleBottom) {
+    } else if (nextScroll > contentsStaticTop - offsetTop && nextScroll < articleBottom - offsetTop) {
       $contents.css({
         'position': 'fixed',
         'top': offsetTop,

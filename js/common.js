@@ -134,7 +134,7 @@ var getArticleTitles = (function() {
   return function() {
     if ($titles !== null) { return $titles; }
 
-    var $t = $('[id^=b3_solo_h]');
+    var $t = $('.J_article__content [id*=_h]');
     $titles = $t;
 
     return $titles;

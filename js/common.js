@@ -186,19 +186,24 @@ function ScrollManagerCreator(_now) {
     var contentsStaticTop = $prev.offset().top + $prev.height()
     var offsetTop = $nav.height() + 1
     var articleBottom = $article.offset().top + $article.height() - contentsHeight + offsetTop;
+    var shouldStopAtBottom = false;
 
     if (nextScroll <= contentsStaticTop - offsetTop) {
       $contents.css('position', 'static');
+      shouldStopAtBottom = false;
     } else if (nextScroll > contentsStaticTop - offsetTop && nextScroll < articleBottom - offsetTop) {
       $contents.css({
         'position': 'fixed',
         'top': offsetTop,
       });
+      shouldStopAtBottom = true;
     } else {
+      if (!shouldStopAtBottom) { return; }
       $contents.css({
         'position': 'absolute',
         'top': articleBottom,
       });
+      shouldStopAtBottom = true;
     }
   }
 

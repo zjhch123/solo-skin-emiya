@@ -21,12 +21,11 @@
  * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
  * @version 0.1.0.0, Feb 17, 2017
  */
-import '../../../js/common'
+
 /**
  * @description 皮肤脚本
  * @static
  */
-
 const scrollTo = (to) => {
   $('html ,body').animate({
     scrollTop: to,
@@ -222,7 +221,6 @@ class Emiya {
   }
 
   initArticle() {
-    this.initPageShare();
     try {
       this.initContents();
     } catch (e) { console.error(e); }

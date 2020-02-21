@@ -63,7 +63,7 @@ class ScrollManager {
     if (this.scrollY < this.prevScrollY) {
       $navBar.addClass('show')
     } else {
-      // $navBar.removeClass('show')
+      $navBar.removeClass('show')
     }
   }
 

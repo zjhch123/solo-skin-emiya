@@ -5,8 +5,8 @@
 ## 概述
 
 - 作者: zjhch123
-- 版本: 1.3.3
-- 对应solo版本: 3.8.0
+- 版本: 1.4.0
+- 对应solo版本: 3.9.0
 
 ## 预览
 
@@ -128,5 +128,10 @@ git clone https://github.com/zjhch123/solo-skin-emiya emiya
 ### 1.3.3
 
 1. 修复某些情况下文章目录会消失的问题
+
+### 1.4.0
+
+1. 适配solo 3.9.0
+2. 重构js代码，使用ES6方式构建
 
 </details>

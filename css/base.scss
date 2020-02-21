@@ -17,8 +17,11 @@
 
 */
 
-@import "vditor/src/assets/scss/classic";
 @import "../../../scss/reset";
+@import "../../../scss/function";
+@import "../../../scss/toc";
+@import "../../../scss/usite";
+@import "vditor/src/assets/scss/index";
 
 $primary-color: #d6555f;
 $blog-max-width: 1280px;
@@ -962,6 +965,10 @@ a {
       @include mobile {
         display: none;
       }
+    }
+    .qrcode {
+      position: absolute;
+      display: none;
     }
   }
 }

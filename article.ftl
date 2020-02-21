@@ -30,7 +30,10 @@
                 data-title="${article.articleTitle}"
                 data-blogtitle="${blogTitle}"
                 data-url="${servePath}${article.articlePermalink}"
-                data-avatar="${article.authorThumbnailURL}"></a>
+                data-avatar="${article.authorThumbnailURL}">
+                <span class="qrcode J_qrcode"></span>  
+              </a>
+              
             </div>
             <div class="comment__container">
               <#if commentable>

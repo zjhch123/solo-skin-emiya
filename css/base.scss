@@ -969,6 +969,9 @@ a {
     .qrcode {
       position: absolute;
       display: none;
+      background-size: 95% 95%;
+      background-repeat: no-repeat;
+      background-position: center center;
     }
   }
 }

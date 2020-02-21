@@ -268,15 +268,16 @@ class Emiya {
         }
 
         if ($qrCode.css('background-image') === 'none') {
+          const width = $wechatShare.width()
           const qr = new QRious({
             padding: 0,
             element: $qrCode[0],
             value: self.shareURLs['wechat'],
-            size: 99,
+            size: width,
           })
           $qrCode.css('background-image', `url(${qr.toDataURL('image/jpeg')})`)
-            .css('height', $wechatShare.width())
-            .css('width', $wechatShare.width())
+            .css('height', width)
+            .css('width', width)
             .css('bottom', $wechatShare.height())
           $qrCode.slideToggle()
         } else {

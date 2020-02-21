@@ -26,199 +26,100 @@
  * @description 皮肤脚本
  * @static
  */
-function Emiya() {
-  this.listen()
+const scrollTo = (to) => {
+  $('html ,body').animate({
+    scrollTop: to,
+  }, 300);
 }
 
-function initPageShare() {
-  var $this = $('.J_share')
-  var $qrCode = $('.J_share_wechat')
-  var shareURL = $qrCode.data('url')
-  var avatarURL = $qrCode.data('avatar')
-  var title = encodeURIComponent($qrCode.data('title') + ' - ' +
-    $qrCode.data('blogtitle')),
-    url = encodeURIComponent(shareURL)
+const $navBar = $('.J_navbar')
+const $backToTop = $('.toTop')
+const $contents = $('.J_article__contents')
+const $article = $('.J_article__content')
+const $wechatShare = $('.J_share_wechat')
+const $qrCode = $('.J_qrcode')
 
-  var urls = {}
-  urls.weibo = 'http://v.t.sina.com.cn/share/share.php?title=' + title + '&url=' + url + '&pic=' + avatarURL
-  urls.qzone = 'https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + url + '&sharesource=qzone&title=' + title + '&pics=' + avatarURL
-  urls.twitter = 'https://twitter.com/intent/tweet?status=' + title + ' ' + url
+class ScrollManager {
+  constructor() {
+    this.showBackToTopHeight = 100
+    this.prevScrollY = $(window).scrollTop()
+    this.scrollY = $(window).scrollTop()
+    this.contentsStaticTop = $('.J_article__contents').length > 0 ? $contents.offset().top : 0
+    this.isContentsFixed = false
+    this.listen()
+    this.calculate()
+  }
 
-  $this.on('click', function () {
-    var key = $(this).data('type')
-
-    if (!key) {
+  checkNavbarFixed() {
+    const navBarHeight = $navBar.height() + 1
+    // 在顶端
+    if (this.scrollY === 0) {
+      $navBar.removeClass('is-fixed').css('top', 0)
       return
     }
 
-    if (key === 'wechat') {
-      if ($qrCode.find('canvas').length === 0) {
-        $.ajax({
-          method: 'GET',
-          url: Label.staticServePath +
-          '/js/lib/jquery.qrcode.min.js',
-          dataType: 'script',
-          cache: true,
-          success: function () {
-            $qrCode.qrcode({
-              width: 128,
-              height: 128,
-              text: shareURL,
-            })
-          },
-        })
-      } else {
-        $qrCode.find('canvas').slideToggle()
-      }
-      return false
-    }
+    $navBar.addClass('is-fixed').css('top', -1 * navBarHeight)
 
-    window.open(urls[key], '_blank', 'top=100,left=200,width=648,height=618')
-  })
-}
-
-function initContents() {
-  var priorities = {
-    h1: 5,
-    h2: 4,
-    h3: 3,
-    h4: 2,
-    h5: 1,
-  };
-  var $titles = getArticleTitles();
-
-  if ($titles.length === 0) {
-    $('.J_article__contents').hide();
-    return;
-  }
-
-  var tpl = '<ul class="article__contents">';
-  var prevPriority;
-  var firstPriority;
-
-  $titles.each(function(index, dom) {
-    var priority = priorities[dom.tagName.toLowerCase()];
-    var title = $titles.eq(index).text();
-    var $item = $('<i><li><a href="javascript:void(0);" data-target="#' + $titles.eq(index).attr('id') + '"></a></li></i>');
-    $item.find('a').text(title);
-
-    var item = $item.html();
-
-    if (!priority) {
-      return;
-    }
-
-    if (!firstPriority) {
-      tpl += item;
-      firstPriority = priority;
+    if (this.scrollY < this.prevScrollY) {
+      $navBar.addClass('show')
     } else {
-      if (priority === prevPriority) {
-        tpl += item;
-      } else if (priority < prevPriority) {
-        tpl += Array(prevPriority - priority).fill('<ul>').join('') + item;
-      } else if (priority > prevPriority) {
-        tpl += Array(priority - prevPriority).fill('</ul>').join('') + item;
-      }
-    }
-
-    prevPriority = priority;
-  });
-
-  tpl += Array(firstPriority - prevPriority + 1).fill('</ul>').join('');
-  $('.J_article__contents--container').append(tpl);
-}
-
-var getArticleTitles = (function() {
-  var $titles = null;
-
-  return function() {
-    if ($titles !== null) { return $titles; }
-
-    var $t = $('.J_article__content [id*=_h]');
-    $titles = $t;
-
-    return $titles;
-  }
-})();
-
-function ScrollManagerCreator(_now) {
-  var nowScroll = _now
-  var $nav = $('.J_navbar')
-  var $backToTop = $('.toTop')
-  var $contents = $('.J_article__contents')
-  var $article = $('.J_article__content')
-  var showBackToTopHeight = 100
-  var shouldStopAtBottom = false
-
-  function checkFixed(nextScroll) {
-    var offsetTop = $nav.height() + 1
-    if (nextScroll > offsetTop) {
-      $nav.addClass('is-fixed').css('top', -1 * offsetTop);
-    } else if (nextScroll <= 0) {
-      $nav.removeClass('is-fixed').css('top', 0);
-    }
-
-    if (!$nav.hasClass('is-fixed')) {
-      return
-    }
-
-    if (nextScroll > nowScroll) {
-      $nav.removeClass('show')
-    } else {
-      $nav.addClass('show')
+      $navBar.removeClass('show')
     }
   }
 
-  function checkBackToTop(nextScroll) {
-    if(nextScroll > showBackToTopHeight) {
+  checkBackToTop() {
+    if(this.scrollY > this.showBackToTopHeight) {
       $backToTop.fadeIn()
     } else {
       $backToTop.fadeOut()
     }
   }
 
-  function checkContents(nextScroll) {
+  checkContents() {
     if ($contents.length <= 0) {
       return
     }
-    
-    var $prev = $contents.prev()
 
-    var ulHeight = $contents.find('ul').height()
-    var contentsHeight = $contents.height()
-    contentsHeight = ulHeight > contentsHeight ? contentsHeight : ulHeight
+    const navBarHeight = $navBar.height()
+    const articleBottom = $article.offset().top + $article.height()
+    const contentsBottom = this.scrollY + navBarHeight + $contents.height()
 
-    var contentsStaticTop = $prev.offset().top + $prev.height()
-    var offsetTop = $nav.height() + 1
-    var articleBottom = $article.offset().top + $article.height() - contentsHeight
-
-    if (nextScroll <= contentsStaticTop - offsetTop) {
-      $contents.css('position', 'static');
-      shouldStopAtBottom = false;
-    } else if (nextScroll > contentsStaticTop - offsetTop && nextScroll < articleBottom - offsetTop) {
-      $contents.css({
-        'position': 'fixed',
-        'top': offsetTop,
-      });
-      shouldStopAtBottom = true;
-    } else {
-      if (!shouldStopAtBottom) { return; }
+    if (contentsBottom >= articleBottom && this.isContentsFixed) {
       $contents.css({
         'position': 'absolute',
-        'top': articleBottom,
+        'top': articleBottom - $contents.height(),
+      })
+      this.isContentsFixed = false
+      return
+    }
+
+    if (this.scrollY + navBarHeight <= this.contentsStaticTop) {
+      $contents.css({
+        'position': 'static',
+        'top': 0,
       });
-      shouldStopAtBottom = true;
+      this.isContentsFixed = false
+      return
+    }
+
+    if (this.scrollY + navBarHeight > this.contentsStaticTop && contentsBottom < articleBottom) {
+      $contents.css({
+        'position': 'fixed',
+        'top': navBarHeight,
+      })
+      this.isContentsFixed = true
+      return
     }
   }
 
-  function checkContentHighlight(nextScroll) {
-    var offsetTop = $nav.height() + 1
-    var $contentLink = $('.J_article__contents--container a')
-    var nowIndex
+  checkContentsHighlight() {
+    const offsetTop = $navBar.height() + 1
+    const $contentLink = $('.J_article__contents--container a')
+    let nowIndex
 
-    for (var i = 0; i < $contentLink.length; i++) {
-      var target = $contentLink.eq(i).attr('data-target')
-      if (nextScroll + offsetTop > $(target).offset().top) {
+    for (let i = 0; i < $contentLink.length; i++) {
+      const target = $contentLink.eq(i).attr('data-target')
+      if (this.scrollY + offsetTop > $(target).offset().top) {
         nowIndex = i
       }
     }
@@ -227,67 +128,167 @@ function ScrollManagerCreator(_now) {
     $contentLink.eq(nowIndex).addClass('active')
   }
 
-  checkFixed(nowScroll)
-  checkBackToTop(nowScroll)
-  checkContents(nowScroll)
-  checkContentHighlight(nowScroll)
+  calculate() {
+    this.checkNavbarFixed()
+    this.checkBackToTop()
+    this.checkContents()
+    this.checkContentsHighlight()
+  }
 
-  return function(nextScroll) {
-    checkFixed(nextScroll)
-    checkBackToTop(nextScroll)
-    checkContents(nextScroll)
-    checkContentHighlight(nextScroll)
-
-    nowScroll = nextScroll
+  listen() {
+    $(window).on('scroll', () => {
+      this.prevScrollY = this.scrollY
+      this.scrollY = $(window).scrollTop()
+      this.calculate()
+    });
   }
 }
 
-function scrollTo(to) {
-  $('html ,body').animate({
-    scrollTop: to,
-  }, 300);
-}
+class Emiya {
+  constructor() {
+    this.listen()
+    this.shareURLs = this.initPageShare()
+  }
 
-var scrollManager = ScrollManagerCreator($(window).scrollTop())
+  initPageShare() {
+    const shareURL = $wechatShare.data('url')
+    const avatarURL = $wechatShare.data('avatar')
+    const title = encodeURIComponent(`${$wechatShare.data('title')} - ${$wechatShare.data('blogtitle')}`)
+    const url = encodeURIComponent(shareURL)
 
-Emiya.prototype.listen = function() {
-  $(".J_navbar_toggle").on("click", function() {
-    var targetClass = '.' + $(this).attr('data-for')
-    if ($(targetClass).hasClass('show')) {
-        $(targetClass).removeClass('show')
-    } else {
-        $(targetClass).addClass('show')
+    return {
+      weibo: `http://v.t.sina.com.cn/share/share.php?title=${title}&url=${url}&pic=${avatarURL}`,
+      qzone: `https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=${url}&sharesource=qzone&title=${title}&pics=${avatarURL}`,
+      wechat: shareURL,
     }
-  });
-  $(".J_replyName").on('click', function() {
-    var replyName = $(this).attr('data-originalId');
-    $('#' + replyName)[0].scrollIntoViewIfNeeded(true);
-    $('#' + replyName).addClass('blink');
-    setTimeout(function() {
-      $('#' + replyName).removeClass('blink');
-    }, 3000);
-  });
-  $('.J_backToTop').on('click', function(e) {
-    scrollTo(0);
-    e.preventDefault();
-  });
-  $(window).on('scroll', function() {
-    var nowScrollTop = $(window).scrollTop()
-    scrollManager(nowScrollTop)
-  });
-  $('body').on('click', '.J_article__contents--container a', function() {
-    var target = $(this).attr('data-target');
-    var scrollTarget = $(target).offset().top - $('.J_navbar').height() + 1;
-    scrollTo(scrollTarget);
-  });
-  $('body').on('touchstart', function() { });
+  }
+
+  initContents() {
+    const priorities = {
+      h1: 5,
+      h2: 4,
+      h3: 3,
+      h4: 2,
+      h5: 1,
+    };
+
+    const $titles = this.getArticleTitles();
+  
+    if ($titles.length === 0) {
+      $('.J_article__contents').hide();
+      return;
+    }
+  
+    let tpl = '<ul class="article__contents">';
+    let prevPriority;
+    let firstPriority;
+  
+    $titles.each(function(index, dom) {
+      const priority = priorities[dom.tagName.toLowerCase()];
+      const title = $titles.eq(index).text();
+      const $item = $('<i><li><a href="javascript:void(0);" data-target="#' + $titles.eq(index).attr('id') + '"></a></li></i>');
+      $item.find('a').text(title);
+  
+      const item = $item.html();
+  
+      if (!priority) {
+        return;
+      }
+  
+      if (!firstPriority) {
+        tpl += item;
+        firstPriority = priority;
+      } else {
+        if (priority === prevPriority) {
+          tpl += item;
+        } else if (priority < prevPriority) {
+          tpl += Array(prevPriority - priority).fill('<ul>').join('') + item;
+        } else if (priority > prevPriority) {
+          tpl += Array(priority - prevPriority).fill('</ul>').join('') + item;
+        }
+      }
+  
+      prevPriority = priority;
+    });
+  
+    tpl += Array(firstPriority - prevPriority + 1).fill('</ul>').join('');
+
+    $('.J_article__contents--container').append(tpl);
+  }
+
+  getArticleTitles() {
+    return $('.J_article__content [id*=_h]');
+  }
+
+  initArticle() {
+    try {
+      this.initContents();
+    } catch (e) { console.error(e); }
+  }
+
+  listen() {
+    const self = this
+    $('body').on('touchstart', function() { })
+    $(".J_navbar_toggle").on("click", function() {
+      const targetClass = '.' + $(this).attr('data-for')
+      if ($(targetClass).hasClass('show')) {
+          $(targetClass).removeClass('show')
+      } else {
+          $(targetClass).addClass('show')
+      }
+    })
+    $(".J_replyName").on('click', function() {
+      const replyName = $(this).attr('data-originalId');
+      $('#' + replyName)[0].scrollIntoViewIfNeeded(true);
+      $('#' + replyName).addClass('blink');
+      setTimeout(function() {
+        $('#' + replyName).removeClass('blink');
+      }, 3000);
+    })
+    $('.J_backToTop').on('click', function(e) {
+      scrollTo(0);
+      e.preventDefault();
+    })
+    $('body').on('click', '.J_article__contents--container a', function() {
+      const target = $(this).attr('data-target');
+      const scrollTarget = $(target).offset().top - $('.J_navbar').height() + 1;
+      scrollTo(scrollTarget);
+    })
+    $('body').on('click', '.J_share', function() {
+      const key = $(this).data('type')
+      if (!key) {
+        return
+      }
+
+      if (key === 'wechat') {
+        if (typeof QRious === 'undefined') {
+          Util.addScript(Label.staticServePath + '/js/lib/qrious.min.js', 'qriousScript')
+        }
+
+        if ($qrCode.css('background-image') === 'none') {
+          const width = $wechatShare.width()
+          const qr = new QRious({
+            padding: 0,
+            element: $qrCode[0],
+            value: self.shareURLs['wechat'],
+            size: width,
+          })
+          $qrCode.css('background-image', `url(${qr.toDataURL('image/jpeg')})`)
+            .css('height', width)
+            .css('width', width)
+            .css('bottom', $wechatShare.height())
+            .css('background-size', `${width}px ${width}px`)
+          $qrCode.slideToggle()
+        } else {
+          $qrCode.slideToggle()
+        }
+        return
+      }
+  
+      window.open(self.shareURLs[key], '_blank', 'top=100,left=200,width=648,height=618')
+    })
+  }
 }
 
-Emiya.prototype.initArticle = function() {
-  initPageShare();
-  try {
-    initContents();
-  } catch (e) { console.error(e); }
-}
-
+window.scrollManager = new ScrollManager();
 window.Skin = new Emiya();

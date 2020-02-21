@@ -279,6 +279,7 @@ class Emiya {
             .css('height', width)
             .css('width', width)
             .css('bottom', $wechatShare.height())
+            .css('background-size', `${width}px ${width}px`)
           $qrCode.slideToggle()
         } else {
           $qrCode.slideToggle()

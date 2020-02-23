@@ -91,13 +91,17 @@ a {
     @content;
   }
 }
-
+body {
+  min-width: 1080px;
+  @include mobile {
+    min-width: auto;
+  }
+}
 .fn {
   &__none {
     display: none;
   }
 }
-
 .blog {
   &__title {
     font-size: 22px;
@@ -142,9 +146,7 @@ a {
     }
   }
 }
-
 .navbar {
-  min-width: 1280px;
   position: absolute;
   top: 0;
   left: 0;
@@ -324,7 +326,6 @@ a {
   right: 0;
   height: 406px;
   width: 100%;
-  min-width: 1280px;
   flex: 0 0 100%;
   background-repeat: no-repeat;
   background-position: center center;

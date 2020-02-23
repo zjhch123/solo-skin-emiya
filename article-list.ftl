@@ -20,7 +20,7 @@
     </div>
     <div class="article__intro">
       <div class="title">
-        <a href="${servePath}${article.articlePermalink}">${article.articleTitle}</a>
+        <a pjax-title="${article.articleTitle}" href="${servePath}${article.articlePermalink}">${article.articleTitle}</a>
         <#if article.articlePutTop>
         <sup>
           ${topArticleLabel}

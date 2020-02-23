@@ -22,6 +22,7 @@
 @import "../../../scss/toc";
 @import "../../../scss/usite";
 @import "vditor/src/assets/scss/index";
+@import "../../../scss/nprogress";
 
 $primary-color: #d6555f;
 $blog-max-width: 1280px;
@@ -90,19 +91,18 @@ a {
     @content;
   }
 }
-
+body {
+  min-width: 1080px;
+  @include mobile {
+    min-width: auto;
+  }
+}
 .fn {
   &__none {
     display: none;
   }
 }
-
 .blog {
-  &__container {
-    width: 100%;
-    max-width: 1280px;
-    margin: 48px auto 0;
-  }
   &__title {
     font-size: 22px;
     margin-bottom: 24px;
@@ -112,18 +112,20 @@ a {
     }
   }
 }
-
 .container-fluid {
   display: flex;
   align-items: flex-start;
   margin: auto;
+  max-width: 1280px;
+  min-height: 700px;
+  padding-top: calc(406px + 48px);
   .container--left,
   .container--right {
     box-sizing: border-box;
     padding: 0 16px;
   }
   .container--left {
-    flex: 1 1 auto;
+    flex: 1 1 calc(1280px - 370px);
     overflow: hidden;
   }
   .container--right {
@@ -144,7 +146,6 @@ a {
     }
   }
 }
-
 .navbar {
   position: absolute;
   top: 0;
@@ -308,6 +309,7 @@ a {
   }
 
   @include mobile {
+    min-width: 100%;
     &__container--mobile {
       display: flex;
     }
@@ -318,8 +320,13 @@ a {
 }
 
 .custom_header {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 406px;
+  width: 100%;
+  flex: 0 0 100%;
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: scroll;
@@ -393,6 +400,10 @@ a {
         }
       }
     }
+  }
+
+  @include mobile {
+    min-width: 100%;
   }
 }
 
@@ -971,6 +982,8 @@ a {
       display: none;
       background-repeat: no-repeat;
       background-position: center center;
+      left: 50%;
+      margin-left: -60px;
     }
   }
 }

@@ -35,16 +35,13 @@ const scrollTo = (to) => {
 const $navBar = $('.J_navbar')
 const $backToTop = $('.toTop')
 const $contents = $('.J_article__contents')
-const $article = $('.J_article__content')
-const $wechatShare = $('.J_share_wechat')
-const $qrCode = $('.J_qrcode')
 
 class ScrollManager {
   constructor() {
     this.showBackToTopHeight = 100
     this.prevScrollY = $(window).scrollTop()
     this.scrollY = $(window).scrollTop()
-    this.contentsStaticTop = $('.J_article__contents').length > 0 ? $contents.offset().top : 0
+    this.contentsStaticTop = $('.J_article__contents').prev().offset().top + $('.J_article__contents').prev().height()
     this.isContentsFixed = false
     this.listen()
     this.calculate()
@@ -53,7 +50,7 @@ class ScrollManager {
   checkNavbarFixed() {
     const navBarHeight = $navBar.height() + 1
     // 在顶端
-    if (this.scrollY === 0) {
+    if (this.scrollY <= 0) {
       $navBar.removeClass('is-fixed').css('top', 0)
       return
     }
@@ -76,7 +73,8 @@ class ScrollManager {
   }
 
   checkContents() {
-    if ($contents.length <= 0) {
+    const $article = $('.J_article__content')
+    if ($article.length <= 0) {
       return
     }
 
@@ -147,10 +145,10 @@ class ScrollManager {
 class Emiya {
   constructor() {
     this.listen()
-    this.shareURLs = this.initPageShare()
   }
 
   initPageShare() {
+    const $wechatShare = $('.J_share_wechat')
     const shareURL = $wechatShare.data('url')
     const avatarURL = $wechatShare.data('avatar')
     const title = encodeURIComponent(`${$wechatShare.data('title')} - ${$wechatShare.data('blogtitle')}`)
@@ -221,15 +219,19 @@ class Emiya {
   }
 
   initArticle() {
+    $('.J_article__contents').removeClass('fn__none')
     try {
       this.initContents();
-    } catch (e) { console.error(e); }
+    } catch (e) {
+      $('.J_article__contents').addClass('fn__none')
+      console.error(e);
+    }
   }
 
   listen() {
     const self = this
     $('body').on('touchstart', function() { })
-    $(".J_navbar_toggle").on("click", function() {
+    $('body').on("click", '.J_navbar_toggle', function() {
       const targetClass = '.' + $(this).attr('data-for')
       if ($(targetClass).hasClass('show')) {
           $(targetClass).removeClass('show')
@@ -237,7 +239,7 @@ class Emiya {
           $(targetClass).addClass('show')
       }
     })
-    $(".J_replyName").on('click', function() {
+    $('body').on('click', '.J_replyName', function() {
       const replyName = $(this).attr('data-originalId');
       $('#' + replyName)[0].scrollIntoViewIfNeeded(true);
       $('#' + replyName).addClass('blink');
@@ -245,7 +247,7 @@ class Emiya {
         $('#' + replyName).removeClass('blink');
       }, 3000);
     })
-    $('.J_backToTop').on('click', function(e) {
+    $('body').on('click', '.J_backToTop', function(e) {
       scrollTo(0);
       e.preventDefault();
     })
@@ -255,6 +257,10 @@ class Emiya {
       scrollTo(scrollTarget);
     })
     $('body').on('click', '.J_share', function() {
+      const shareURLs = self.initPageShare()
+      const $qrCode = $('.J_qrcode')
+      const $wechatShare = $('.J_share_wechat')
+
       const key = $(this).data('type')
       if (!key) {
         return
@@ -264,13 +270,12 @@ class Emiya {
         if (typeof QRious === 'undefined') {
           Util.addScript(Label.staticServePath + '/js/lib/qrious.min.js', 'qriousScript')
         }
-
         if ($qrCode.css('background-image') === 'none') {
-          const width = $wechatShare.width()
+          const width = 120
           const qr = new QRious({
-            padding: 0,
             element: $qrCode[0],
-            value: self.shareURLs['wechat'],
+            value: shareURLs['wechat'],
+            value: shareURLs['wechat'],
             size: width,
           })
           $qrCode.css('background-image', `url(${qr.toDataURL('image/jpeg')})`)
@@ -285,10 +290,14 @@ class Emiya {
         return
       }
   
-      window.open(self.shareURLs[key], '_blank', 'top=100,left=200,width=648,height=618')
+      window.open(shareURLs[key], '_blank', 'top=100,left=200,width=648,height=618')
     })
   }
 }
 
 window.scrollManager = new ScrollManager();
 window.Skin = new Emiya();
+Util.initPjax(() => {
+  $('.J_article__contents').addClass('fn__none');
+  $('.J_article__contents--container').empty();
+});

@@ -35,8 +35,6 @@ const scrollTo = (to) => {
 const $navBar = $('.J_navbar')
 const $backToTop = $('.toTop')
 const $contents = $('.J_article__contents')
-const $wechatShare = $('.J_share_wechat')
-const $qrCode = $('.J_qrcode')
 
 class ScrollManager {
   constructor() {
@@ -147,10 +145,10 @@ class ScrollManager {
 class Emiya {
   constructor() {
     this.listen()
-    this.shareURLs = this.initPageShare()
   }
 
   initPageShare() {
+    const $wechatShare = $('.J_share_wechat')
     const shareURL = $wechatShare.data('url')
     const avatarURL = $wechatShare.data('avatar')
     const title = encodeURIComponent(`${$wechatShare.data('title')} - ${$wechatShare.data('blogtitle')}`)
@@ -233,7 +231,7 @@ class Emiya {
   listen() {
     const self = this
     $('body').on('touchstart', function() { })
-    $(".J_navbar_toggle").on("click", function() {
+    $('body').on("click", '.J_navbar_toggle', function() {
       const targetClass = '.' + $(this).attr('data-for')
       if ($(targetClass).hasClass('show')) {
           $(targetClass).removeClass('show')
@@ -241,7 +239,7 @@ class Emiya {
           $(targetClass).addClass('show')
       }
     })
-    $(".J_replyName").on('click', function() {
+    $('body').on('click', '.J_replyName', function() {
       const replyName = $(this).attr('data-originalId');
       $('#' + replyName)[0].scrollIntoViewIfNeeded(true);
       $('#' + replyName).addClass('blink');
@@ -249,7 +247,7 @@ class Emiya {
         $('#' + replyName).removeClass('blink');
       }, 3000);
     })
-    $('.J_backToTop').on('click', function(e) {
+    $('body').on('click', '.J_backToTop', function(e) {
       scrollTo(0);
       e.preventDefault();
     })
@@ -259,6 +257,10 @@ class Emiya {
       scrollTo(scrollTarget);
     })
     $('body').on('click', '.J_share', function() {
+      const shareURLs = self.initPageShare()
+      const $qrCode = $('.J_qrcode')
+      const $wechatShare = $('.J_share_wechat')
+
       const key = $(this).data('type')
       if (!key) {
         return
@@ -268,12 +270,12 @@ class Emiya {
         if (typeof QRious === 'undefined') {
           Util.addScript(Label.staticServePath + '/js/lib/qrious.min.js', 'qriousScript')
         }
-
         if ($qrCode.css('background-image') === 'none') {
           const width = 120
           const qr = new QRious({
             element: $qrCode[0],
-            value: self.shareURLs['wechat'],
+            value: shareURLs['wechat'],
+            value: shareURLs['wechat'],
             size: width,
           })
           $qrCode.css('background-image', `url(${qr.toDataURL('image/jpeg')})`)
@@ -288,7 +290,7 @@ class Emiya {
         return
       }
   
-      window.open(self.shareURLs[key], '_blank', 'top=100,left=200,width=648,height=618')
+      window.open(shareURLs[key], '_blank', 'top=100,left=200,width=648,height=618')
     })
   }
 }

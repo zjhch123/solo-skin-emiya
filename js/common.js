@@ -52,7 +52,7 @@ class ScrollManager {
   checkNavbarFixed() {
     const navBarHeight = $navBar.height() + 1
     // 在顶端
-    if (this.scrollY === 0) {
+    if (this.scrollY <= 0) {
       $navBar.removeClass('is-fixed').css('top', 0)
       return
     }
@@ -270,9 +270,8 @@ class Emiya {
         }
 
         if ($qrCode.css('background-image') === 'none') {
-          const width = $wechatShare.width()
+          const width = 120
           const qr = new QRious({
-            padding: 0,
             element: $qrCode[0],
             value: self.shareURLs['wechat'],
             size: width,

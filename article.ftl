@@ -34,7 +34,7 @@
             <span class="qrcode J_qrcode"></span>  
           </a>
         </div>
-        <div class="comment__container">
+        <div class="comment__container" id="comments">
           <#if commentable>
             <div id="vcomment" data-name="${article.authorName}" data-postId="${article.oId}"></div>
               <#if !staticSite>

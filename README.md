@@ -10,7 +10,7 @@
 
 ## 预览
 
-<img src="https://image.hduzplus.xyz/image/1557897716540.jpg" alt="preview" width="600">
+<img src="https://image.hduzplus.xyz/image/1557897716540.jpg?id=1" alt="preview" width="600">
 
 [在线预览](https://blog.hduzplus.xyz?from=github_page)
 

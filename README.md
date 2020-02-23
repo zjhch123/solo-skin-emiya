@@ -5,7 +5,7 @@
 ## 概述
 
 - 作者: zjhch123
-- 版本: 1.4.0
+- 版本: 1.5.0
 - 对应solo版本: 3.9.0
 
 ## 预览
@@ -133,5 +133,10 @@ git clone https://github.com/zjhch123/solo-skin-emiya emiya
 
 1. 适配solo 3.9.0
 2. 重构js代码，使用ES6方式构建
+
+### 1.5.0
+
+1. 适配pjax, 重构页面布局与样式
+2. 实现全站pjax, 头部/内容区左侧会随着页面不同而刷新，侧栏保持固定
 
 </details>

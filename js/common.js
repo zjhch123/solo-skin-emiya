@@ -35,7 +35,6 @@ const scrollTo = (to) => {
 const $navBar = $('.J_navbar')
 const $backToTop = $('.toTop')
 const $contents = $('.J_article__contents')
-const $article = $('.J_article__content')
 const $wechatShare = $('.J_share_wechat')
 const $qrCode = $('.J_qrcode')
 
@@ -44,7 +43,7 @@ class ScrollManager {
     this.showBackToTopHeight = 100
     this.prevScrollY = $(window).scrollTop()
     this.scrollY = $(window).scrollTop()
-    this.contentsStaticTop = $('.J_article__contents').length > 0 ? $contents.offset().top : 0
+    this.contentsStaticTop = $('.J_article__contents').prev().offset().top + $('.J_article__contents').prev().height()
     this.isContentsFixed = false
     this.listen()
     this.calculate()
@@ -76,7 +75,8 @@ class ScrollManager {
   }
 
   checkContents() {
-    if ($contents.length <= 0) {
+    const $article = $('.J_article__content')
+    if ($article.length <= 0) {
       return
     }
 
@@ -221,9 +221,13 @@ class Emiya {
   }
 
   initArticle() {
+    $('.J_article__contents').removeClass('fn__none')
     try {
       this.initContents();
-    } catch (e) { console.error(e); }
+    } catch (e) {
+      $('.J_article__contents').addClass('fn__none')
+      console.error(e);
+    }
   }
 
   listen() {
@@ -292,3 +296,7 @@ class Emiya {
 
 window.scrollManager = new ScrollManager();
 window.Skin = new Emiya();
+Util.initPjax(() => {
+  $('.J_article__contents').addClass('fn__none');
+  $('.J_article__contents--container').empty();
+});

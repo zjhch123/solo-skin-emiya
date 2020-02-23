@@ -70,15 +70,14 @@
   </section>
   </#if>
 
-  <#if article??>
-  <section class="sidebar__container article__contents J_article__contents">
+  <section class="sidebar__container article__contents J_article__contents fn__none">
     <div class="header">
       <span>${articleContent}</span>
     </div>
     <div class="contents J_article__contents--container">
     </div>
   </section>
-  </#if>
+
   <div class="toTop J_backToTop">
     <img src="${staticServePath}/skins/${skinDirName}/images/top.png" />
   </div>

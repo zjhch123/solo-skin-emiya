@@ -579,6 +579,11 @@ body {
         }
       }
     }
+    .board {
+      margin-top: 24px;
+      line-height: 1.51;
+      word-break: break-all;
+    }
     .search {
       margin-top: 24px;
       .search__form {

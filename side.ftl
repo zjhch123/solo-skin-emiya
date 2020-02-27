@@ -1,4 +1,14 @@
 <div class="sidebar">
+  <#if noticeBoard?? && (noticeBoard?length > 0)>
+  <section class="sidebar__container">
+    <div class="header">
+      <span>${boardLabel}</span>
+    </div>
+    <div class="board" id="board">
+      ${noticeBoard}    
+    </div>
+  </section>
+  </#if>
   <section class="sidebar__container">
     <div class="header">
       <span>${searchLabel}</span>

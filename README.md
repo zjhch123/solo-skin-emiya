@@ -5,8 +5,8 @@
 ## 概述
 
 - 作者: zjhch123
-- 版本: 1.5.1
-- 对应solo版本: 3.9.0
+- 版本: 1.6.0
+- 对应solo版本: 4.0.0
 
 ## 预览
 
@@ -142,5 +142,10 @@ git clone https://github.com/zjhch123/solo-skin-emiya emiya
 ### 1.5.1
 
 1. 支持公告栏配置
+
+### 1.6.0
+
+1. 适配solo 4.0.0
+2. 尝试修复在lute模式下文章目录不显示的问题
 
 </details>

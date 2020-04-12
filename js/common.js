@@ -215,7 +215,7 @@ class Emiya {
   }
 
   getArticleTitles() {
-    return $('.J_article__content [id*=_h]');
+    return $('.J_article__content').find('h1,h2,h3,h4,h5,h6');
   }
 
   initArticle() {

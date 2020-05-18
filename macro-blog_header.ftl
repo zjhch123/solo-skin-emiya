@@ -32,7 +32,12 @@
       </div>
     </div>
   </nav>
-  <div class="custom_header" style="background-image: url('/skins/${skinDirName}/images/header.jpg')"></div>
+  <#if customVars['headerBgImage']?? >
+    <div class="custom_header" style="background-image: url('${customVars['headerBgImage']}')"></div>
+  </#if>
+  <#if !customVars['headerBgImage']?? >
+    <div class="custom_header" style="background-image: url('/skins/${skinDirName}/images/header.jpg')"></div>
+  </#if>
 </#macro>
 
 <#macro common_header>

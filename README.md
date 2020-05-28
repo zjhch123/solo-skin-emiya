@@ -5,8 +5,8 @@
 ## 概述
 
 - 作者: zjhch123
-- 版本: 1.6.0
-- 对应solo版本: 4.0.0
+- 版本: 1.7.0
+- 对应solo版本: 4.1.0
 
 ## 预览
 
@@ -36,6 +36,10 @@ git clone https://github.com/zjhch123/solo-skin-emiya emiya
 ```
 
 [历史版本下载](https://github.com/zjhch123/solo-skin-emiya/releases)
+
+## 支持的模板变量
+
+1. `headerBgImage` - 可用于配置自定义的头图, 例如: `headerBgImage=http://www.baidu.com` ([issue#33](https://github.com/zjhch123/solo-skin-emiya/issues/33))
 
 ## 致谢
 
@@ -147,5 +151,10 @@ git clone https://github.com/zjhch123/solo-skin-emiya emiya
 
 1. 适配solo 4.0.0
 2. 尝试修复在lute模式下文章目录不显示的问题
+
+### 1.7.0
+
+1. 适配solo 4.1.0
+2. 增加自定义模板变量 `headerBgImage` 用以配置自定义头图([issue#33](https://github.com/zjhch123/solo-skin-emiya/issues/33))
 
 </details>

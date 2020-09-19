@@ -37,10 +37,10 @@
     <div class="article__visit">
       <div class="article__visit--left">
         <span class="item--split createTime">${article.articleCreateDate?string("yyyy-MM-dd")}</span>
-        <a class="item item--split" href="${servePath}${article.articlePermalink}#comments">
+        <span class="item item--split" href="${servePath}${article.articlePermalink}#comments">
           <span data-uvstatcmt="${article.oId}">0</span> 
           ${commentLabel}
-        </a>
+        </span>
         <span class="item">
           <span data-uvstaturl="${servePath}${article.articlePermalink}">0</span> ${viewLabel}
         </span>

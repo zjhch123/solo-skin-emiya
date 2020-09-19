@@ -1,6 +1,5 @@
 <#include "macro-head.ftl">
 <#include "macro-blog_header.ftl">
-<#include "macro-comment.ftl">
 <#include "../../common-template/macro-comment_script.ftl">
 
 <!DOCTYPE html>
@@ -35,14 +34,9 @@
           </a>
         </div>
         <div class="comment__container" id="comments">
-          <#if commentable>
-            <div id="vcomment" data-name="${article.authorName}" data-postId="${article.oId}"></div>
-              <#if !staticSite>
-              <div id="soloComments" class="fn__none">
-                <@article_comments commentList=articleComments article=article></@article_comments>
-              </div>
-              </#if>
-          </#if>
+          <div id="gitalk-container"></div>
+          <div id="b3logsolocomments"></div>
+          <div id="vcomment" data-name="${article.authorName}" data-postId="${article.oId}"></div>
         </div>
         <div class="recommendation__container">
           <div class="item" id="externalRelevantArticles">
@@ -60,15 +54,20 @@
     </div>
     <#include "footer.ftl">
     <#if pjax><!---- pjax {#pjax} start ----></#if>
-      <@comment_script oId=article.oId commentable=article.commentable>
-        Skin.initComment = function (articleOId, articleTags) {
-          page.tips.externalRelevantArticlesDisplayCount = "${externalRelevantArticlesDisplayCount}";
-          page.loadExternalRelevantArticles(articleTags, "<div class='header'><span>HACPAI POSTS</span></div>");
+      <@comment_script oId=article.oId>
+
+      page.tips.externalRelevantArticlesDisplayCount = "${externalRelevantArticlesDisplayCount}";
+      <#if 0 != randomArticlesDisplayCount>
           page.loadRandomArticles("<div class='header'><span>RECOMMEND POSTS</span></div>");
+      </#if>
+      <#if 0 != externalRelevantArticlesDisplayCount>
+          page.loadExternalRelevantArticles(articleTags, "<div class='header'><span>HACPAI POSTS</span></div>");
+      </#if>
+      <#if 0 != relevantArticlesDisplayCount>
           page.loadRelevantArticles(articleOId, '<div class="header"><span>RELEVANT POSTS</span></div>');
-        }
-        Skin.initComment('${article.oId}', "<#list article.articleTags?split(",") as articleTag>${articleTag}<#if articleTag_has_next>,</#if></#list>")
-        Skin.initArticle()
+      </#if>
+
+      Skin.initArticle()
       </@comment_script>
     <#if pjax><!---- pjax {#pjax} end ----></#if>
   </body>

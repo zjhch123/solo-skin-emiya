@@ -160,5 +160,6 @@ git clone https://github.com/zjhch123/solo-skin-emiya emiya
 ### 1.8.0
 
 1. 适配solo 4.3.1
+2. 修复点击评论按钮博客title可能会改变的问题
 
 </details>

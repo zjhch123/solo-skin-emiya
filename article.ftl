@@ -61,10 +61,10 @@
           page.loadRandomArticles("<div class='header'><span>RECOMMEND POSTS</span></div>");
       </#if>
       <#if 0 != externalRelevantArticlesDisplayCount>
-          page.loadExternalRelevantArticles(articleTags, "<div class='header'><span>HACPAI POSTS</span></div>");
+          page.loadExternalRelevantArticles("<#list article.articleTags?split(",") as articleTag>${articleTag}<#if articleTag_has_next>,</#if></#list>", "<div class='header'><span>HACPAI POSTS</span></div>");
       </#if>
       <#if 0 != relevantArticlesDisplayCount>
-          page.loadRelevantArticles(articleOId, '<div class="header"><span>RELEVANT POSTS</span></div>');
+          page.loadRelevantArticles('${article.oId}', '<div class="header"><span>RELEVANT POSTS</span></div>');
       </#if>
 
       Skin.initArticle()

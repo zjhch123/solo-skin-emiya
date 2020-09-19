@@ -5,8 +5,8 @@
 ## 概述
 
 - 作者: zjhch123
-- 版本: 1.7.0
-- 对应solo版本: 4.1.0
+- 版本: 1.8.0
+- 对应solo版本: 4.3.1
 
 ## 预览
 
@@ -156,5 +156,10 @@ git clone https://github.com/zjhch123/solo-skin-emiya emiya
 
 1. 适配solo 4.1.0
 2. 增加自定义模板变量 `headerBgImage` 用以配置自定义头图([issue#33](https://github.com/zjhch123/solo-skin-emiya/issues/33))
+
+### 1.8.0
+
+1. 适配solo 4.3.1
+2. 修复点击评论按钮博客title可能会改变的问题
 
 </details>
